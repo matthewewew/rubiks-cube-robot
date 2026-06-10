@@ -560,3 +560,4 @@ rightUp()
 print(cube)
 print(moves)
 
+#test
