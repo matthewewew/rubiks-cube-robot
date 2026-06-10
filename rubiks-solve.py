@@ -557,6 +557,7 @@ cube = ['Y','R','Y','Y','Y','R','B','B','W','W','O','R','W','W','W','W','B','G',
 moves = []
 
 #Red and white edge
+#top -- 1 (top)
 if cube[1] == 'R' and cube[37] == 'W':
     topRight()
     leftDown()
@@ -567,6 +568,7 @@ elif cube[1] == 'W' and cube[37] == 'R':
     topRight()
     frontRight()
     frontRight()
+#top -- 2 (left)
 elif cube[3] == 'R' and cube[46] == 'W':
     leftDown()
     frontLeft()
@@ -575,6 +577,7 @@ elif cube[3] == 'W' and cube[46] == 'R':
     topRight()
     frontLeft()
     frontLeft()
+#top -- 3 (bottom)
 elif cube[7] == 'W' and cube[19] == 'R':
     frontLeft()
     frontLeft()
@@ -583,6 +586,15 @@ elif cube[7] == 'R' and cube[19] == 'W':
     leftDown()
     frontLeft()
     leftUp()
-
+#top -- 4 (right)
+elif cube[5] == 'W' and cube[28] == 'R':
+    topLeft()
+    frontLeft()
+    frontLeft()
+elif cube[5] == 'R' and cube[28] == 'W'
+    rightDown()
+    frontRight()
+    rightUp()
+    
 print(cube)
 print(moves)
