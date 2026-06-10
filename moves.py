@@ -1,3 +1,6 @@
+cube = []
+moves = []
+
 def topLeft():
     #creates temp variables for the top layer of cube
     f1 = cube[18]
@@ -366,6 +369,7 @@ def leftDown():
     cube[53] = l3
     #adds move to moves array
     moves.append("lD")
+    
 def frontRight():
     t7 = cube[6]
     t8 = cube[7]
@@ -550,13 +554,15 @@ def backLeft():
     cube[48] = t2
     cube[51] = t1
     moves.append("backL")
-# The order goes top, bottom, front, right, back, left
-#cube = ['Y','Y','Y','Y','Y','Y','Y','Y','Y','W','W','W','W','W','W','W','W','W','R','R','R','R','R','R','R','R','R','G','G','G','G','G','G','G','G','G','O','O','O','O','O','O','O','O','O','B','B','B','B','B','B','B','B','B']
-cube = ['O','B','B','G','Y','W','G','B','G','Y','R','B','G','W','O','W','B','O','W','R','Y','R','R','O','G','G','O','R','G','R','W','G','B','Y','Y','B','Y','Y','G','W','O','W','W','O','B','W','Y','R','R','B','Y','R','O','O']
-moves = []
-rightUp()
 
+def rightyAlg():
+    rightUp()
+    topLeft()
+    rightDown()
+    topRight()
 
-print(cube)
-print(moves)
-
+def leftyAlg():
+    leftUp()
+    topLeft()
+    leftDown()
+    topRight()
