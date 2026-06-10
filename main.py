@@ -1,5 +1,6 @@
 import moves
-from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, rightDown, rightUp, rotateFrontFaceRight, rotateFrontFaceUp
+from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, rightDown, rightUp,\
+      rotateFrontFaceRight, rotateFrontFaceLeft, rotateFrontFaceUp, rotateFrontFaceDown, sexy, leftyAlg
 # The order goes top, bottom, front, right, back, left
 cube = ['Y','Y','Y','Y','Y','Y','Y','Y','Y','W','W','W','W','W','W','W','W','W','R','R','R','R','R','R','R','R','R','G','G','G','G','G','G','G','G','G','O','O','O','O','O','O','O','O','O','B','B','B','B','B','B','B','B','B']
 #cube = ['Y','R','Y','Y','Y','R','B','B','W','W','O','R','W','W','W','W','B','G','R','O','G','B','R','G','O','G','B','R','Y','G','R','G','W','Y','G','R','O','W','O','O','O','G','Y','Y','O','B','O','W','Y','B','R','B','B','G']
@@ -65,11 +66,36 @@ elif cube[41] == 'R' and cube[48] == 'W':
     rightDown()
 #middle -- 2 (top right)
 
+
+
+
+#Post White Cross. Assume yellow is on top, white is on bottom, green front.
+ftrCorner = {cube[i] for i in (8, 20, 27)}
+ftlCorner = {cube[i] for i in (6, 18, 47)}
+fbotlCorner = {cube[i] for i in (9, 24, 53)}
+fbotrCorner = {cube[i] for i in (11, 26, 33)}
+
+btrCorner = {cube[i] for i in (2, 29, 36)}
+btlCorner = {cube[i] for i in (0, 38, 45)}
+bbotlCorner = {cube[i] for i in (15, 44, 51)}
+bbotrCorner = {cube[i] for i in (17, 35, 42)}
+
+while True:
+    if ftrCorner == {'G', 'O', 'W'} or fbotrCorner == {'G', 'O', 'W'}: 
+        while (cube[26] != 'G') or (cube[33] != 'O'):
+            sexy()
+        break
+    elif fbotlCorner == {'G', 'O', 'W'}:
+        rotateFrontFaceLeft()
+
+
+        topLeft()
+    
+
+
 rotateFrontFaceUp()
 
 print(ogCube == cube)
-
-#rotateFrontFaceUp()
 
 print(cube)
 print(moveHistory)

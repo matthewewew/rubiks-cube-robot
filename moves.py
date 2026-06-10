@@ -620,15 +620,15 @@ def rotateFrontFaceRight():
     cube[6] = t1
     cube[7] = t4
     cube[8] = t7
-    cube[9] = bot3
-    cube[10] = bot6
-    cube[11] = bot9
-    cube[12] = bot2
+    cube[9] = bot7
+    cube[10] = bot4
+    cube[11] = bot1
+    cube[12] = bot8
     cube[13] = bot5
-    cube[14] = bot8
-    cube[15] = bot1
-    cube[16] = bot4
-    cube[17] = bot7
+    cube[14] = bot2
+    cube[15] = bot9
+    cube[16] = bot6
+    cube[17] = bot3
     cube[18] = l1
     cube[19] = l2
     cube[20] = l3
@@ -731,15 +731,15 @@ def rotateFrontFaceUp():
     cube[6] = f7
     cube[7] = f8
     cube[8] = f9
-    cube[9] = b1
-    cube[10] = b2
-    cube[11] = b3
-    cube[12] = b4
+    cube[9] = b9
+    cube[10] = b8
+    cube[11] = b7
+    cube[12] = b6
     cube[13] = b5
-    cube[14] = b6
-    cube[15] = b7
-    cube[16] = b8
-    cube[17] = b9
+    cube[14] = b4
+    cube[15] = b3
+    cube[16] = b2
+    cube[17] = b1
     cube[18] = bot1
     cube[19] = bot2
     cube[20] = bot3
@@ -758,15 +758,15 @@ def rotateFrontFaceUp():
     cube[33] = r9
     cube[34] = r6
     cube[35] = r3
-    cube[36] = t1
-    cube[37] = t2
-    cube[38] = t3
-    cube[39] = t4
+    cube[36] = t9
+    cube[37] = t8
+    cube[38] = t7
+    cube[39] = t6
     cube[40] = t5
-    cube[41] = t6
-    cube[42] = t7
-    cube[43] = t8
-    cube[44] = t9
+    cube[41] = t4
+    cube[42] = t3
+    cube[43] = t2
+    cube[44] = t1
     cube[45] = l3
     cube[46] = l6
     cube[47] = l9
@@ -776,6 +776,16 @@ def rotateFrontFaceUp():
     cube[51] = l1
     cube[52] = l4
     cube[53] = l7
+
+def rotateFrontFaceDown():
+    rotateFrontFaceUp()
+    rotateFrontFaceUp()
+    rotateFrontFaceUp()
+
+def rotateFrontFaceLeft():
+    rotateFrontFaceRight()
+    rotateFrontFaceRight()
+    rotateFrontFaceRight()
 
 def sexy():
     rightUp()
