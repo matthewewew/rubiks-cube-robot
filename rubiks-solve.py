@@ -1,3 +1,4 @@
+
 def topLeft():
     #creates temp variables for the top layer of cube
     f1 = cube[18]
@@ -552,12 +553,36 @@ def backLeft():
     moves.append("backL")
 # The order goes top, bottom, front, right, back, left
 #cube = ['Y','Y','Y','Y','Y','Y','Y','Y','Y','W','W','W','W','W','W','W','W','W','R','R','R','R','R','R','R','R','R','G','G','G','G','G','G','G','G','G','O','O','O','O','O','O','O','O','O','B','B','B','B','B','B','B','B','B']
-cube = ['O','B','B','G','Y','W','G','B','G','Y','R','B','G','W','O','W','B','O','W','R','Y','R','R','O','G','G','O','R','G','R','W','G','B','Y','Y','B','Y','Y','G','W','O','W','W','O','B','W','Y','R','R','B','Y','R','O','O']
+cube = ['Y','R','Y','Y','Y','R','B','B','W','W','O','R','W','W','W','W','B','G','R','O','G','B','R','G','O','G','B','R','Y','G','R','G','W','Y','G','R','O','W','O','O','O','G','Y','Y','O','B','O','W','Y','B','R','B','B','G']
 moves = []
-rightUp()
 
+#Red and white edge
+if cube[1] == 'R' and cube[37] == 'W':
+    topRight()
+    leftDown()
+    frontLeft()
+    leftUp()
+elif cube[1] == 'W' and cube[37] == 'R':
+    topRight()
+    topRight()
+    frontRight()
+    frontRight()
+elif cube[3] == 'R' and cube[46] == 'W':
+    leftDown()
+    frontLeft()
+    leftUp()
+elif cube[3] == 'W' and cube[46] == 'R':
+    topRight()
+    frontLeft()
+    frontLeft()
+elif cube[7] == 'W' and cube[19] == 'R':
+    frontLeft()
+    frontLeft()
+elif cube[7] == 'R' and cube[19] == 'W':
+    topRight()
+    leftDown()
+    frontLeft()
+    leftUp()
 
 print(cube)
 print(moves)
-
-#test
