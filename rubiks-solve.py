@@ -591,10 +591,24 @@ elif cube[5] == 'W' and cube[28] == 'R':
     topLeft()
     frontLeft()
     frontLeft()
-elif cube[5] == 'R' and cube[28] == 'W'
+elif cube[5] == 'R' and cube[28] == 'W':
     rightDown()
     frontRight()
     rightUp()
-    
+
+#middle -- 1 (top left)
+elif cube[41] == 'W' and cube[48] == 'R':
+    leftDown()
+    topRight()
+    frontLeft()
+    frontLeft()
+elif cube[41] == 'R' and cube[48] == 'W':
+    rightDown()
+    rightDown()
+    frontLeft()
+    rightDown()
+    rightDown()
+#middle -- 2 (top right)
+
 print(cube)
 print(moves)
