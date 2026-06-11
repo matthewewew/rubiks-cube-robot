@@ -10,12 +10,12 @@ from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, ri
 
 #test case for white cross
 
-cube = ['R', 'Y', 'R', 'B', 'Y', 'B', 'W', 'B', 'Y',
-         'W', 'W', 'W', 'W', 'W', 'W', 'G', 'W', 'O',
-           'O', 'O', 'G', 'O', 'G', 'Y', 'G', 'G', 'G',
-             'O', 'R', 'Y', 'O', 'O', 'G', 'O', 'O', 'Y',
-               'B', 'R', 'B', 'R', 'B', 'G', 'B', 'B', 'R',
-                 'W', 'Y', 'B', 'Y', 'R', 'G', 'Y', 'R', 'R']
+cube =      ['R', 'Y', 'R', 'G', 'Y', 'B', 'O', 'B', 'W',
+            'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'O',
+            'G', 'Y', 'B', 'O', 'G', 'Y', 'G', 'G', 'G',
+            'O', 'R', 'Y', 'O', 'O', 'G', 'O', 'O', 'Y',
+            'B', 'R', 'G', 'R', 'B', 'B', 'B', 'B', 'B',
+            'Y', 'Y', 'Y', 'O', 'R', 'G', 'R', 'R', 'R']
 
 moveHistory = []
 
@@ -212,6 +212,41 @@ while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
 
       else:
             topLeft()
+      
+while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
+      if btrCorner() == {'B', 'O', 'W'} or bbotrCorner() == {'B', 'O', 'W'}: 
+            while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
+                  sexyRight()
+            break
+      elif bbotlCorner() == {'B', 'O', 'W'}:      
+            while (btlCorner() != {'B', 'O', 'W'}):
+                  sexyBack()        
+            topLeft()
+
+            while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
+                  sexyRight()
+            break
+      elif fbotrCorner() == {'B', 'O', 'W'}:
+            while (ftrCorner() != {'B', 'O', 'W'}):
+                  sexyFront()
+            topRight()
+
+            while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
+                  sexyRight()
+            break
+
+      elif fbotlCorner() == {'B', 'O', 'W'}:
+            while (ftlCorner() != {'B', 'O', 'W'}):
+                  sexyLeft()
+            topLeft()
+            topLeft
+
+            while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
+                  sexyRight()
+            break
+
+      else:
+            topLeft()      
 
 print(ogCube == cube)
 print(cube)
