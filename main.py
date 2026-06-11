@@ -11,12 +11,12 @@ from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, ri
 #test case for white cross
 
 cube = [
-    'Y','B','W','Y','Y','O','W','G','R',
-    'W','W','W','W','W','W','O','W','Y',
-    'B','Y','Y','O','G','O','O','G','R',
-    'B','B','B','G','O','R','G','O','O',
-    'O','Y','R','G','B','R','G','B','Y',
-    'G','R','R','B','R','Y','B','R','G'
+    'Y','Y','G','B','Y','G','B','G','O',
+    'W','W','G','W','W','W','B','W','O',
+    'W','R','G','O','G','B','R','G','W',
+    'W','O','Y','Y','O','R','R','O','G',
+    'R','G','B','Y','B','B','Y','B','O',
+    'R','R','O','O','R','Y','Y','R','B'
 ]
 
 moveHistory = []
