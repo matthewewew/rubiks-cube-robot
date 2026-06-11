@@ -791,6 +791,8 @@ def rotateFrontFaceUp():
     cube[52] = l4
     cube[53] = l7
 
+    #Add T-Perm: sexy, R',F,R2,U',R',U',R,U,R',F'
+
 def rotateFrontFaceDown():
     rotateFrontFaceUp()
     rotateFrontFaceUp()

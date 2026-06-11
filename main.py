@@ -21,6 +21,7 @@ cube = [
 
 moveHistory = []
 standardNotationMoves = []
+standardNotationMovesStr = ""
 
 moves.cube = cube
 moves.moves = moveHistory
@@ -256,5 +257,10 @@ print(ogCube == cube)
 print(cube)
 print(moveHistory)
 print("Number of moves: ", len(moveHistory))
-print(standardNotationMoves)
+
+for i in range(len(standardNotationMoves)):   
+      standardNotationMovesStr += standardNotationMoves[i]
+      standardNotationMovesStr += ", "
+
+print(standardNotationMovesStr)
 
