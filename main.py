@@ -10,12 +10,12 @@ from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, ri
 
 #test case for white cross
 
-cube = ['G', 'B', 'R', 'B', 'Y', 'Y', 'R', 'G', 'G',
-         'B', 'W', 'W', 'W', 'W', 'W', 'G', 'W', 'O',
-           'B', 'O', 'O', 'O', 'G', 'Y', 'O', 'G', 'G',
-             'Y', 'R', 'B', 'O', 'O', 'G', 'O', 'O', 'Y',
-               'W', 'Y', 'R', 'R', 'B', 'G', 'B', 'B', 'R',
-                 'W', 'R', 'Y', 'Y', 'R', 'B', 'Y', 'R', 'W']
+cube = ['R', 'Y', 'R', 'B', 'Y', 'B', 'W', 'B', 'Y',
+         'W', 'W', 'W', 'W', 'W', 'W', 'G', 'W', 'O',
+           'O', 'O', 'G', 'O', 'G', 'Y', 'G', 'G', 'G',
+             'O', 'R', 'Y', 'O', 'O', 'G', 'O', 'O', 'Y',
+               'B', 'R', 'B', 'R', 'B', 'G', 'B', 'B', 'R',
+                 'W', 'Y', 'B', 'Y', 'R', 'G', 'Y', 'R', 'R']
 
 moveHistory = []
 
@@ -141,7 +141,7 @@ while (cube[26] != 'G') or (cube[33] != 'O') or (cube[11] != 'W'):
     else:
         topLeft()
     
-    
+
 while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
       if ftlCorner() == {'G', 'R', 'W'} or fbotlCorner() == {'G', 'R', 'W'}: 
             while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
@@ -172,6 +172,42 @@ while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
 
             while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
                   sexyLeft()
+            break
+
+      else:
+            topLeft()
+
+
+while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
+      if btlCorner() == {'B', 'R', 'W'} or bbotlCorner() == {'B', 'R', 'W'}: 
+            while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
+                  sexyBack()
+            break
+      elif fbotrCorner() == {'B', 'R', 'W'}:      
+            while (ftrCorner() != {'B', 'R', 'W'}):
+                  sexyFront()        
+            topLeft()
+            topLeft()
+
+            while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
+                  sexyBack()
+            break
+      elif bbotrCorner() == {'B', 'R', 'W'}:
+            while (btrCorner() != {'B', 'R', 'W'}):
+                  sexyRight()
+            topRight()
+
+            while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
+                  sexyBack()
+            break
+
+      elif fbotlCorner() == {'B', 'R', 'W'}:
+            while (ftlCorner() != {'B', 'R', 'W'}):
+                  sexyLeft()
+            topLeft()
+
+            while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
+                  sexyBack()
             break
 
       else:
