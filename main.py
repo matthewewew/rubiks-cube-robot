@@ -10,17 +10,21 @@ from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, ri
 
 #test case for white cross
 
-cube =      ['R', 'Y', 'R', 'G', 'Y', 'B', 'O', 'B', 'W',
-            'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'O',
-            'G', 'Y', 'B', 'O', 'G', 'Y', 'G', 'G', 'G',
-            'O', 'R', 'Y', 'O', 'O', 'G', 'O', 'O', 'Y',
-            'B', 'R', 'G', 'R', 'B', 'B', 'B', 'B', 'B',
-            'Y', 'Y', 'Y', 'O', 'R', 'G', 'R', 'R', 'R']
+cube = [
+    'Y','B','W','Y','Y','O','W','G','R',
+    'W','W','W','W','W','W','O','W','Y',
+    'B','Y','Y','O','G','O','O','G','R',
+    'B','B','B','G','O','R','G','O','O',
+    'O','Y','R','G','B','R','G','B','Y',
+    'G','R','R','B','R','Y','B','R','G'
+]
 
 moveHistory = []
+standardNotationMoves = []
 
 moves.cube = cube
 moves.moves = moveHistory
+moves.moves2 = standardNotationMoves
 
 ogCube = cube.copy()
 
@@ -239,7 +243,7 @@ while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
             while (ftlCorner() != {'B', 'O', 'W'}):
                   sexyLeft()
             topLeft()
-            topLeft
+            topLeft()
 
             while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
                   sexyRight()
@@ -251,5 +255,6 @@ while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
 print(ogCube == cube)
 print(cube)
 print(moveHistory)
+print("Number of moves: ", len(moveHistory))
 
 
