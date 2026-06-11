@@ -522,7 +522,7 @@ def backRight():
     cube[48] = bot8
     cube[51] = bot9
     moves.append("backR")
-    moves2.append("B")
+    moves2.append("B'")
 def backLeft():
     #create temp variables for back of cube
     t1 = cube[0]
@@ -567,7 +567,7 @@ def backLeft():
     cube[48] = t2
     cube[51] = t1
     moves.append("backL")
-    moves2.append("B'")
+    moves2.append("B")
 
 def rotateFrontFaceRight():
     t1 = cube[0]
