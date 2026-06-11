@@ -787,14 +787,74 @@ def rotateFrontFaceLeft():
     rotateFrontFaceRight()
     rotateFrontFaceRight()
 
-def sexy():
+def sexyFront():
     rightUp()
     topLeft()
     rightDown()
     topRight()
 
-def leftyAlg():
+def sexyRight():
+    backLeft()
+    topLeft()
+    backRight()
+    topRight()
+
+def sexyBack():
+    leftDown()
+    topLeft()
+    leftUp()
+    topRight()
+
+def sexyLeft():
+    frontRight()
+    topLeft()
+    frontLeft()
+    topRight()
+
+def sexyTop():
+    rightUp()
+    backLeft()
+    rightDown()
+    backRight()
+
+def sexyBot():
+    rightUp()
+    frontRight()
+    rightDown()
+    frontLeft()
+
+def leftyFront():
     leftUp()
     topLeft()
     leftDown()
     topRight()
+
+def leftyRight():
+    frontLeft()
+    topRight()
+    frontRight()
+    topLeft()
+
+def leftyBack():
+    rightDown()
+    topRight()
+    rightUp()
+    topLeft()
+
+def leftyLeft():
+    backRight()
+    topRight()
+    backLeft()
+    topLeft()
+
+def leftyTop():
+    leftUp()
+    backRight()
+    leftDown()
+    backLeft()
+
+def leftyBot():
+    leftUp()
+    frontLeft()
+    leftDown()
+    frontRight()
