@@ -1,5 +1,6 @@
 cube = []
 moves = []
+moves2 = []
 
 def topLeft():
     #creates temp variables for the top layer of cube
@@ -48,6 +49,7 @@ def topLeft():
     cube[8] = t3
     #adds move to move array
     moves.append("tL")
+    moves2.append("U")
 def topRight():
     #creates variables for top of cube
     f1 = cube[18]
@@ -93,6 +95,8 @@ def topRight():
     cube[47] = b3
     #adds move to move list
     moves.append("tR")
+    moves2.append("U'")
+
 def bottomLeft():
     #creates temp variables for the bottom layer of cube
     f7 = cube[24]
@@ -137,7 +141,8 @@ def bottomLeft():
     cube[16] = bot4
     cube[17] = bot7
     #adds move to move array
-    moves.append("bL")
+    moves.append("botL")
+    moves2.append("D")
 def bottomRight():
     #create temp variables for bottom of cube
     bot1 = cube[9]
@@ -182,7 +187,8 @@ def bottomRight():
     cube[52] = b8
     cube[53] = b9
     #append to moves
-    moves.append("bR")
+    moves.append("botR")
+    moves2.append("D'")
 def rightUp():
     t3 = cube[2]
     t6 = cube[5]
@@ -231,6 +237,7 @@ def rightUp():
     cube[34] = r6
     cube[35] = r3
     moves.append("rU")
+    moves2.append("R")
 def rightDown():
     t3 = cube[2]
     t6 = cube[5]
@@ -279,6 +286,7 @@ def rightDown():
     cube[34] = r4
     cube[35] = r7
     moves.append("rD")
+    moves2.append("R'")
 def leftUp():
     #temporary variables
     t1 = cube[0]
@@ -324,6 +332,7 @@ def leftUp():
     cube[53] = l7
     #adds move to moves array
     moves.append("lU")
+    moves2.append("L'")
 def leftDown():
     #temporary variables
     t1 = cube[0]
@@ -369,6 +378,7 @@ def leftDown():
     cube[53] = l3
     #adds move to moves array
     moves.append("lD")
+    moves2.append("L")
     
 def frontRight():
     t7 = cube[6]
@@ -418,6 +428,7 @@ def frontRight():
     cube[25] = f6
     cube[26] = f3
     moves.append("fR")
+    moves2.append("F")
 def frontLeft():
     t7 = cube[6]
     t8 = cube[7]
@@ -466,6 +477,7 @@ def frontLeft():
     cube[25] = f4
     cube[26] = f7
     moves.append("fL")
+    moves2.append("F'")
 def backRight():
     #create temp variables for back of cube
     t1 = cube[0]
@@ -510,6 +522,7 @@ def backRight():
     cube[48] = bot8
     cube[51] = bot9
     moves.append("backR")
+    moves2.append("B")
 def backLeft():
     #create temp variables for back of cube
     t1 = cube[0]
@@ -554,6 +567,7 @@ def backLeft():
     cube[48] = t2
     cube[51] = t1
     moves.append("backL")
+    moves2.append("B'")
 
 def rotateFrontFaceRight():
     t1 = cube[0]

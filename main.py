@@ -256,5 +256,5 @@ print(ogCube == cube)
 print(cube)
 print(moveHistory)
 print("Number of moves: ", len(moveHistory))
-
+print(standardNotationMoves)
 
