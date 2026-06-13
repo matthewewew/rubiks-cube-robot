@@ -2,7 +2,8 @@ import moves
 from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, rightDown, rightUp,\
       rotateFrontFaceRight, rotateFrontFaceLeft, rotateFrontFaceUp, rotateFrontFaceDown,\
       sexyFront, sexyRight, sexyLeft, sexyBack, sexyTop, sexyBot,\
-      leftyFront, leftyBack, leftyTop, leftyBot, leftyLeft, leftyRight
+      leftyFront, leftyBack, leftyTop, leftyBot, leftyLeft, leftyRight,\
+      tPermFront, tPermRight, tPermBack, tPermLeft
 # The order goes top, bottom, front, right, back, left
 #cube = ['Y','Y','Y','Y','Y','Y','Y','Y','Y','W','W','W','W','W','W','W','W','W','R','R','R','R','R','R','R','R','R','G','G','G','G','G','G','G','G','G','O','O','O','O','O','O','O','O','O','B','B','B','B','B','B','B','B','B']
 #cube = ['Y','R','Y','Y','Y','R','B','B','W','W','O','R','W','W','W','W','B','G','R','O','G','B','R','G','O','G','B','R','Y','G','R','G','W','Y','G','R','O','W','O','O','O','G','Y','Y','O','B','O','W','Y','B','R','B','B','G']
@@ -10,13 +11,23 @@ from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, ri
 
 #test case for white cross
 
+# cube = [
+#     'Y','Y','G','B','Y','G','B','G','O',
+#     'W','W','G','W','W','W','B','W','O',
+#     'W','R','G','O','G','B','R','G','W',
+#     'W','O','Y','Y','O','R','R','O','G',
+#     'R','G','B','Y','B','B','Y','B','O',
+#     'R','R','O','O','R','Y','Y','R','B'
+# ]
+
+#Blank cube green front
 cube = [
-    'Y','Y','G','B','Y','G','B','G','O',
-    'W','W','G','W','W','W','B','W','O',
-    'W','R','G','O','G','B','R','G','W',
-    'W','O','Y','Y','O','R','R','O','G',
-    'R','G','B','Y','B','B','Y','B','O',
-    'R','R','O','O','R','Y','Y','R','B'
+     'Y','Y','Y','Y','Y','Y','Y','Y','Y',
+     'W','W','W','W','W','W','W','W','W',
+     'G','G','G','G','G','G','G','G','G',
+     'O','O','O','O','O','O','O','O','O',
+     'B','B','B','B','B','B','B','B','B',
+     'R','R','R','R','R','R','R','R','R' 
 ]
 
 moveHistory = []
@@ -253,14 +264,22 @@ while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
       else:
             topLeft()      
 
+
 print(ogCube == cube)
+# print(cube)
+# print(moveHistory)
+# print("Number of moves: ", len(moveHistory))
+
+# for i in range(len(standardNotationMoves)):   
+#       standardNotationMovesStr += standardNotationMoves[i]
+#       standardNotationMovesStr += ", "
+
+# print(standardNotationMovesStr)
+
+#testing tPerms
+cube = ogCube.copy()
+moves.cube = cube
+
+tPermLeft()
 print(cube)
-print(moveHistory)
-print("Number of moves: ", len(moveHistory))
-
-for i in range(len(standardNotationMoves)):   
-      standardNotationMovesStr += standardNotationMoves[i]
-      standardNotationMovesStr += ", "
-
-print(standardNotationMovesStr)
 

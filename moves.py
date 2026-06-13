@@ -793,6 +793,38 @@ def rotateFrontFaceUp():
 
     #Add T-Perm: sexy, R',F,R2,U',R',U',R,U,R',F'
 
+def tPerm(sexy, rightDownMove, frontRightMove,
+          rightUpMove, topRightMove,
+          topLeftMove, frontLeftMove):
+
+    sexy()
+
+    rightDownMove()
+    frontRightMove()
+    rightUpMove()
+    rightUpMove()
+
+    topRightMove()
+    rightDownMove()
+    topRightMove()
+
+    rightUpMove()
+    topLeftMove()
+    rightDownMove()
+    frontLeftMove()
+
+def tPermFront():
+    tPerm(sexyFront, rightDown,frontRight, rightUp,topRight,topLeft,frontLeft)
+
+def tPermRight():
+    tPerm(sexyRight, backRight, rightUp, backLeft,topRight,topLeft,rightDown)
+
+def tPermBack():
+    tPerm(sexyBack, leftUp, backLeft, leftDown, topRight,topLeft, backRight)
+
+def tPermLeft():
+    tPerm(sexyLeft, frontLeft, leftDown, frontRight, topRight, topLeft, leftUp)
+
 def rotateFrontFaceDown():
     rotateFrontFaceUp()
     rotateFrontFaceUp()
