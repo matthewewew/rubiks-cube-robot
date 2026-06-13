@@ -873,9 +873,9 @@ def sexyBot():
 
 def leftyFront():
     leftUp()
-    topLeft()
-    leftDown()
     topRight()
+    leftDown()
+    topLeft()
 
 def leftyRight():
     frontLeft()
@@ -906,3 +906,123 @@ def leftyBot():
     frontLeft()
     leftDown()
     frontRight()
+
+def invSexyFront():
+    topLeft()
+    rightUp()
+    topRight()
+    rightDown()
+
+def invSexyRight():
+    topLeft()
+    backLeft()
+    topRight()
+    backRight()
+
+def invSexyBack():
+    topLeft()
+    leftDown()
+    topRight()
+    leftUp()
+
+def invSexyLeft():
+    topLeft()
+    frontRight()
+    topRight()
+    frontLeft()
+
+def invLeftyFront():
+    topRight()
+    leftUp()
+    topLeft()
+    leftDown()
+
+def invLeftyRight():
+    topRight()
+    frontLeft()
+    topLeft()
+    frontRight()
+
+def invLeftyBack():
+    topRight()
+    rightDown()
+    topLeft()
+    rightUp()
+
+def invLeftyLeft():
+    topRight()
+    backRight()
+    topLeft()
+    backLeft()
+
+def upsideDownSexyFront():
+    leftDown()
+    bottomRight()
+    leftUp()
+    bottomLeft()
+
+def upsideDownSexyRight():
+    frontLeft()
+    bottomRight()
+    frontRight()
+    bottomLeft()
+
+def upsideDownSexyBack():
+    rightDown()
+    bottomRight()
+    rightUp()
+    bottomLeft()
+
+def upsideDownSexyLeft():
+    backLeft()
+    bottomRight()
+    backRight()
+    bottomLeft()
+
+def uPermFront():
+    sexyFront()
+    leftyFront()
+    invSexyFront()
+    invLeftyFront()
+
+def luPermFront():
+    leftyFront()
+    sexyFront()
+    invLeftyFront()
+    invSexyFront()
+
+def uPermRight():
+    sexyRight()
+    leftyRight()
+    invSexyRight()
+    invLeftyBack()
+
+def luPermRight():
+    leftyRight()
+    sexyRight()
+    invLeftyRight()
+    invSexyRight()
+
+def uPermBack():
+    sexyBack()
+    leftyBack()
+    invSexyBack()
+    invLeftyBack()
+
+def luPermBack():
+    leftyBack()
+    sexyBack()
+    invLeftyBack()
+    invSexyBack()
+
+def uPermLeft():
+    sexyLeft()
+    leftyLeft()
+    invSexyLeft()
+    invLeftyLeft()
+
+def luPermLeft():
+    leftyLeft()
+    sexyLeft()
+    invLeftyLeft()
+    invSexyLeft()
