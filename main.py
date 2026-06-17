@@ -311,6 +311,44 @@ while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
       else:
             topLeft()
 
+#################################
+# POST F2L: Creating Yellow Cross
+#################################
+
+while((cube[1] != 'Y') or (cube[3] != 'Y') or (cube[5] != 'Y') or (cube[7] != 'Y')):
+
+      #Angle Cases
+      if((cube[1] == 'Y') and (cube[3] == 'Y')):
+            topRight()
+            topRight()
+
+      if((cube[1] == 'Y') and (cube[5] == 'Y')):
+            topLeft()
+      
+      if((cube[3] == 'Y') and (cube[7] == 'Y')):
+            topRight()
+
+      if((cube[5] == 'Y') and (cube[7] == 'Y')):
+            frontRight()
+            sexyFront()
+            frontLeft()
+     
+     #fixing vertical line scenario
+      if((cube[1] == 'Y') and (cube[7] == 'Y')):
+            topLeft() 
+      #Horizontal line
+      if((cube[3] == 'Y') and (cube[5] == 'Y')):
+            frontRight()
+            sexyFront()
+            frontLeft()
+      
+      #Check for infinite loop
+      count += 1
+      if(count == 3):
+            print(cube)
+            print("stuck in yellow cross")
+            break
+      
 ###########################
 # POST F2L AND YELLOW CROSS
 ########################### 
@@ -320,6 +358,13 @@ while(cube[0] != 'Y' or cube[2] != 'Y' or cube[6] != 'Y' or cube[8] != 'Y'):
       while(cube[6] != 'Y'):
             upsideDownSexyFront()
       topRight()
+
+            #Check for infinite loop
+      count += 1
+      if(count == 100):
+            print(cube)
+            print("stuck in yellow corners")
+            break
 
 while(cube[6] != 'Y'):
      upsideDownSexyFront()
@@ -410,6 +455,14 @@ while(ftlCorner() != {'Y','R','G'} or\
       else:
             tPermFront()
 
+      
+      #Check for infinite loop
+      count += 1
+      if(count == 100):
+            print(cube)
+            print("stuck in t perm")
+            break
+
 # #Full front top bars for final moves
 def frontBar():
       return [cube[i] for i in (18, 19, 20)]
@@ -424,8 +477,8 @@ def leftBar():
       return [cube[i] for i in (45, 46, 47)]
 
 #check if cube is solved
-while(frontBar != ['G','G','G'] or rightBar != ['O','O','O']\
-       or backBar != ['B','B','B'] or leftBar != ['R','R','R']):
+while((frontBar() != ['G','G','G']) or (rightBar() != ['O','O','O'])\
+       or (backBar() != ['B','B','B']) or (leftBar() != ['R','R','R'])):
       
       #Check for green bar for final moves
       if rightBar() == ['G', 'G', 'G'] or backBar() == ['G', 'G', 'G']\
@@ -533,6 +586,13 @@ while(frontBar != ['G','G','G'] or rightBar != ['O','O','O']\
       else:
             uPermFront()
             #print("17")
+      
+      #Check for infinite loop
+      count += 1
+      if(count == 100):
+            print(cube)
+            print("stuck in u perm")
+            
 
 # print(ogCube == cube)
 #print(cube)
