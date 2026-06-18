@@ -39,12 +39,12 @@ count = 0
 #Post f2l yellow cross cube
 
 cube = [
-      'O','Y','R','Y','Y','Y','O','Y','R',
+      'Y','Y','Y','Y','Y','Y','O','Y','R',
       'W','W','W','W','W','W','W','W','W',
-      'G','R','Y','G','G','G','G','G','G',
-      'B','G','G','O','O','O','O','O','O',
-      'Y','O','B','B','B','B','B','B','B',
-      'Y','B','Y','R','R','R','R','R','R' 
+      'G','G','G','G','G','G','G','G','G',
+      'Y','O','O','O','O','O','O','O','O',
+      'B','R','B','B','B','B','B','B','B',
+      'R','B','Y','R','R','R','R','R','R' 
 ]
 
 #Yellow top f2l solved
@@ -322,10 +322,10 @@ while((cube[1] != 'Y') or (cube[3] != 'Y') or (cube[5] != 'Y') or (cube[7] != 'Y
             topRight()
             topRight()
 
-      if((cube[1] == 'Y') and (cube[5] == 'Y')):
+      elif((cube[1] == 'Y') and (cube[5] == 'Y')):
             topLeft()
       
-      if((cube[3] == 'Y') and (cube[7] == 'Y')):
+      elif((cube[3] == 'Y') and (cube[7] == 'Y')):
             topRight()
 
       if((cube[5] == 'Y') and (cube[7] == 'Y')):
@@ -374,7 +374,6 @@ while(cube[6] != 'Y'):
 def frontHeadlights():
      return [cube[i] for i in (18, 20)]
 
-
 def rightHeadlights():
       return [cube[i] for i in (27, 29)]
 
@@ -384,6 +383,17 @@ def backHeadlights():
 def leftHeadlights():
       return [cube[i] for i in (45, 47)]
 
+#See if a set of headlights exists
+def hasHeadlights(headlights):
+     if headlights == ['G', 'G']\
+            or headlights == ['O', 'O']\
+            or headlights == ['B', 'B']\
+            or headlights == ['R', 'R']:
+          
+          return True
+     else:
+          return False
+     
 
 #testing:
 print(
@@ -400,62 +410,29 @@ while(ftlCorner() != {'Y','R','G'} or\
       btrCorner() != {'Y','O','B'} or\
       btlCorner() != {'Y','R','B'}):
 
-     #Checking for green headlights
-      if frontHeadlights() == ['G', 'G']:
+     #Checking for front headlights
+      if hasHeadlights(frontHeadlights()):
             tPermRight()
-      elif rightHeadlights() == ['G', 'G']:
-            topLeft()
-            tPermRight()
-      elif backHeadlights() == ['G', 'G']:
-            topLeft()
-            topLeft()
-            tPermRight()
-      elif leftHeadlights() == ['G', 'G']:
-            topRight()
-            tPermRight()
-      #Checking for orange headlights
-      elif rightHeadlights() == ['O', 'O']:
+            break
+
+      #Checking for right headlights
+      elif hasHeadlights(rightHeadlights()):
             tPermBack()
-      elif backHeadlights() == ['O', 'O']:
-            topLeft()
-            tPermBack()
-      elif leftHeadlights() == ['O', 'O']:
-            topLeft()
-            topLeft()
-            tPermBack()
-      elif frontHeadlights() == ['O', 'O']:
-            topRight()
-            tPermBack()
-      #Checking for blue headlights
-      elif backHeadlights() == ['B', 'B']:
+            break
+
+      #Checking for back headlights
+      elif hasHeadlights(backHeadlights()):
             tPermLeft()
-      elif leftHeadlights() == ['B', 'B']:
-            topLeft()
-            tPermLeft()
-      elif frontHeadlights() == ['B', 'B']:
-            topLeft()
-            topLeft()
-            tPermLeft()
-      elif rightHeadlights() == ['B', 'B']:
-            topRight()
-            tPermLeft()
-      #Checking for red headlights
-      elif leftHeadlights() == ['R', 'R']:
+            break
+
+      #Checking for left headlights
+      elif hasHeadlights(leftHeadlights()):
             tPermFront()
-      elif frontHeadlights() == ['R', 'R']:
-            topLeft()
-            tPermFront()
-      elif rightHeadlights() == ['R', 'R']:
-            topLeft()
-            topLeft()
-            tPermFront()
-      elif backHeadlights() == ['R', 'R']:
-            topRight()
-            tPermFront()
+            break
+
       else:
             tPermFront()
-
-      
+               
       #Check for infinite loop
       count += 1
       if(count == 100):
@@ -476,14 +453,24 @@ def backBar():
 def leftBar():
       return [cube[i] for i in (45, 46, 47)]
 
+#Functions to check if a bar is filled by a color
+def isGBar(bar):
+      return bar == ['G','G','G']
+
+def isOBar(bar):
+      return bar == ['O','O','O']
+
+def isBBar(bar):
+      return bar == ['B','B','B']
+
+def isRBar(bar):
+      return bar == ['R','R','R']
+     
 #check if cube is solved
-while((frontBar() != ['G','G','G']) or (rightBar() != ['O','O','O'])\
-       or (backBar() != ['B','B','B']) or (leftBar() != ['R','R','R'])):
+while(isGBar(frontBar()) or isOBar(rightBar()) or isBBar(backBar()) or isRBar(leftBar())):
       
       #Check for green bar for final moves
-      if rightBar() == ['G', 'G', 'G'] or backBar() == ['G', 'G', 'G']\
-      or leftBar() == ['G', 'G', 'G'] or frontBar() == ['G', 'G', 'G']:
-            
+      if isGBar(frontBar()) or isGBar(rightBar()) or isGBar(backBar()) or isGBar(leftBar()):         
             if rightBar() == ['G', 'G', 'G']:
                   topLeft()
                   #print("1")
@@ -504,12 +491,10 @@ while((frontBar() != ['G','G','G']) or (rightBar() != ['O','O','O'])\
                   elif cube[28] == 'R':
                         luPermFront()
                         break
-                  #print("4")
-                  
+                  #print("4")                  
 
       #Search for orange bar
-      elif rightBar() == ['O', 'O', 'O'] or backBar() == ['O', 'O', 'O']\
-      or leftBar() == ['O', 'O', 'O'] or frontBar() == ['O', 'O', 'O']:
+      elif isOBar(frontBar()) or isOBar(rightBar()) or isOBar(backBar()) or isOBar(leftBar()):
             if backBar() == ['O', 'O', 'O']:
                   topLeft()
                   #print("5")
@@ -533,8 +518,7 @@ while((frontBar() != ['G','G','G']) or (rightBar() != ['O','O','O'])\
                   #print("8")
 
       #Search for blue bar
-      elif rightBar() == ['B', 'B', 'B'] or backBar() == ['B', 'B', 'B']\
-      or leftBar() == ['B', 'B', 'B'] or frontBar() == ['B', 'B', 'B']:
+      elif isBBar(frontBar()) or isBBar(rightBar()) or isBBar(backBar()) or isBBar(leftBar()):
             if leftBar() == ['B', 'B', 'B']:
                   topLeft()
                   #print("9")
@@ -559,8 +543,7 @@ while((frontBar() != ['G','G','G']) or (rightBar() != ['O','O','O'])\
                   print(cube)
 
       #Search for red bar
-      elif rightBar() == ['R', 'R', 'R'] or backBar() == ['R', 'R', 'R']\
-      or leftBar() == ['R', 'R', 'R'] or frontBar() == ['R', 'R', 'R']:
+      elif isRBar(frontBar()) or isRBar(rightBar()) or isRBar(backBar()) or isRBar(leftBar()):
             if frontBar() == ['R', 'R', 'R']:
                   topLeft()
                   #print("13")
