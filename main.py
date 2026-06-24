@@ -17,13 +17,12 @@ count = 0
 
 #random scramble
 cube = [
-    'B','R','G','Y','Y','Y','O','Y','O',
-    'W','W','W','W','W','W','W','W','W',
-    'Y','R','Y','G','G','B','G','G','G',
-    'G','G','Y','Y','O','O','O','O','O',
-    'R','B','R','B','B','G','B','B','B',
-    'Y','O','B','R','R','O','R','R','R'
-]
+'Y', 'Y', 'B', 'Y', 'Y', 'Y', 'R', 'Y', 'B', 
+'O', 'W', 'O', 'W', 'W', 'W', 'W', 'W', 'W', 
+'Y', 'R', 'R', 'G', 'G', 'G', 'G', 'G', 'Y', 
+'Y', 'B', 'W', 'O', 'O', 'O', 'B', 'O', 'O', 
+'R', 'O', 'G', 'B', 'B', 'B', 'B', 'B', 'R', 
+'O', 'G', 'G', 'R', 'R', 'R', 'G', 'R', 'W']
 
 #test case for white cross
 
@@ -35,6 +34,16 @@ cube = [
 #     'R','G','B','Y','B','B','Y','B','O',
 #     'R','R','O','O','R','Y','Y','R','B'
 # ]
+
+#Post first layer test case:
+
+# cube = [
+# 'Y', 'R', 'O', 'B', 'Y', 'R', 'B', 'G', 'O', 
+# 'W', 'Y', 'W', 'W', 'W', 'W', 'B', 'W', 'B', 
+# 'R', 'R', 'W', 'G', 'G', 'B', 'G', 'G', 'G', 
+# 'B', 'B', 'Y', 'O', 'O', 'O', 'O', 'G', 'O', 
+# 'G', 'Y', 'R', 'Y', 'B', 'O', 'Y', 'B', 'Y', 
+# 'G', 'Y', 'W', 'W', 'R', 'O', 'R', 'R', 'R']
 
 #Blank cube green front
 # cube = [
@@ -88,6 +97,17 @@ moves.moves = moveHistory
 moves.moves2 = standardNotationMoves
 
 ogCube = cube.copy()
+
+#Check if Solved cube
+def cubeSolved():
+    return cube == [
+        'Y','Y','Y','Y','Y','Y','Y','Y','Y',
+        'W','W','W','W','W','W','W','W','W',
+        'G','G','G','G','G','G','G','G','G',
+        'O','O','O','O','O','O','O','O','O',
+        'B','B','B','B','B','B','B','B','B',
+        'R','R','R','R','R','R','R','R','R'
+    ]
 
 #######################################
 #START OF WHITE CROSS CODE; RED-WHITE EDGE
@@ -358,9 +378,6 @@ elif cube[16] == 'B' and cube[43] == 'W':
       rightUp()
       bottomLeft()
 
-
-
-
 ##############################
 #ORANGE-WHITE EDGE
 ##############################
@@ -416,9 +433,9 @@ elif cube[41] == 'W' and cube[48] == 'O':
       bottomRight()
       bottomRight()
 elif cube[41] == 'O' and cube[48] == 'W':
-      bottomLeft()
-      backLeft()
       bottomRight()
+      backLeft()
+      bottomLeft()
 
 #middle -- 2 (front-left)
 elif cube[21] == 'W' and cube[50] == 'O':
@@ -488,8 +505,6 @@ elif cube[16] == 'O' and cube[43] == 'W':
       backLeft()
       rightUp()
 
-
-
 ##############################
 #Green-WHITE EDGE
 ##############################
@@ -497,10 +512,9 @@ elif cube[16] == 'O' and cube[43] == 'W':
 #TOP -- 1 (TOP BACK EDGE)
 if cube[1] == 'G' and cube[37] == 'W':
       topLeft()
-      bottomLeft()
       rightDown()
-      bottomRight()
       frontRight()
+      rightUp()
 elif cube[1] == 'W' and cube[37] == 'G':
       topLeft()
       topLeft()
@@ -578,6 +592,19 @@ elif cube[32] == 'G' and cube[39] == 'W':
 
 #Bottom Edges Unneeded
 
+# Front-bottom edge
+print("Front Bottom:", cube[10], cube[25], "| Should be W G")
+
+# Right-bottom edge
+print("Right Bottom:", cube[14], cube[34], "| Should be W O")
+
+# Back-bottom edge
+print("Back Bottom:", cube[16], cube[43], "| Should be W B")
+
+# Left-bottom edge
+print("Left Bottom:", cube[12], cube[52], "| Should be W R")
+
+
 ########################################################
 #Post White Cross. Assume yellow is on top, green front.
 #First Layer Corners:
@@ -611,7 +638,7 @@ def bbotrCorner():
 
 
 #Solve green, orange, white corner
-while (cube[26] != 'G') or (cube[33] != 'O') or (cube[11] != 'W'):
+while ((cube[26] != 'G') or (cube[33] != 'O') or (cube[11] != 'W')):
     
     if ftrCorner() == {'G', 'O', 'W'} or fbotrCorner() == {'G', 'O', 'W'}: 
         while (cube[26] != 'G') or (cube[33] != 'O') or (cube[11] != 'W'):
@@ -646,8 +673,9 @@ while (cube[26] != 'G') or (cube[33] != 'O') or (cube[11] != 'W'):
         break
     else:
         topLeft()
+        
+        
     
-
 #Solve green, red, white corner
 while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
       if ftlCorner() == {'G', 'R', 'W'} or fbotlCorner() == {'G', 'R', 'W'}: 
@@ -658,6 +686,7 @@ while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
             while (ftrCorner() != {'G', 'R', 'W'}):
                   sexyFront()        
             topLeft()
+            
 
             while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
                   sexyLeft()
@@ -667,6 +696,8 @@ while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
                   sexyRight()
             topLeft()
             topLeft()
+            
+            
 
             while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
                   sexyLeft()
@@ -683,7 +714,7 @@ while (cube[24] != 'G') or (cube[53] != 'R') or (cube[9] != 'W'):
 
       else:
             topLeft()
-
+            
 
 #Solve white, blue, red corner
 while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
@@ -696,6 +727,8 @@ while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
                   sexyFront()        
             topLeft()
             topLeft()
+            
+            
 
             while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
                   sexyBack()
@@ -713,6 +746,8 @@ while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
             while (ftlCorner() != {'B', 'R', 'W'}):
                   sexyLeft()
             topLeft()
+            
+            
 
             while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
                   sexyBack()
@@ -720,6 +755,7 @@ while (cube[15] != 'W') or (cube[44] != 'B') or (cube[51] != 'R'):
 
       else:
             topLeft()
+            
 
 #Solve white, orange, blue corner   
 while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
@@ -756,6 +792,8 @@ while (cube[17] != 'W') or (cube[35] != 'O') or (cube[42] != 'B'):
 
       else:
             topLeft()
+            
+            
 
 #########################################
 # POST FIRST LAYER: Creating Second Layer
@@ -800,21 +838,23 @@ while((frontLeftEdge() != ['G','R']) or (frontRightEdge() != ['G','O'])\
                   topRight()
                   invLeftyBack()
                   invSexyRight()
+                  
             else:
                   topRight()
                   invSexyRight()
                   invLeftyBack()
+                  
             
       elif set(topRightEdge()) == target:
             if cube[28] == 'B':
                   topRight()
                   invLeftyBack()
                   invSexyRight()
+                  
             else:
                   invSexyRight()
                   invLeftyBack()
-
-
+            
       elif set(topBackEdge()) == target:
             if cube[37] == 'B':
                   invLeftyBack()
@@ -823,21 +863,24 @@ while((frontLeftEdge() != ['G','R']) or (frontRightEdge() != ['G','O'])\
                   topLeft()
                   invSexyRight()
                   invLeftyBack()
-            
+                  
+
       elif set(topLeftEdge()) == target:
             if cube[46] == 'B':
                   topLeft()
                   invLeftyBack()
                   invSexyRight()
+                  
             else:
                   topLeft()
                   topLeft()
                   invSexyRight()
                   invLeftyBack()
-
+      
       elif set(frontRightEdge()) == target:
             invSexyFront()
             invLeftyRight()
+            
 
       elif backRightEdge() == ['B','O']:
             invSexyRight()
@@ -847,6 +890,7 @@ while((frontLeftEdge() != ['G','R']) or (frontRightEdge() != ['G','O'])\
       elif set(backLeftEdge()) == target:
             invSexyBack()
             invLeftyLeft()
+            
 
       elif set(frontLeftEdge()) == target:
             invLeftyFront()
@@ -911,6 +955,123 @@ while((frontLeftEdge() != ['G','R']) or (frontRightEdge() != ['G','O'])\
             invLeftyFront()
             invSexyLeft()
       
+      #Solve for orange green corner:
+      target = {'O', 'G'}
+
+      if set(topFrontEdge()) == target:
+            if cube[19] == 'O':
+                  topRight()
+                  invLeftyRight()
+                  invSexyFront()
+            else:
+                  invSexyFront()
+                  invLeftyRight()
+            
+      elif set(topRightEdge()) == target:
+            if cube[28] == 'O':
+                  invLeftyRight()
+                  invSexyFront()
+            else:
+                  topLeft()
+                  invSexyFront()
+                  invLeftyRight()
+
+      elif set(topBackEdge()) == target:
+            if cube[37] == 'O':
+                  topLeft()
+                  invLeftyRight()
+                  invSexyFront()
+            else:
+                  topLeft()
+                  topLeft()
+                  invSexyFront()
+                  invLeftyRight()
+            
+      elif set(topLeftEdge()) == target:
+            if cube[46] == 'O':
+                  topLeft()
+                  topLeft()
+                  invLeftyRight()
+                  invSexyFront()
+            else:
+                  topRight()
+                  invSexyFront()
+                  invLeftyRight()
+
+      elif frontRightEdge() == ['O','G']:
+            invSexyFront()
+            invLeftyRight()
+
+      elif set(backRightEdge()) == target:
+            invSexyRight()
+            invLeftyBack()
+            
+      elif set(backLeftEdge()) == target:
+            invSexyBack()
+            invLeftyLeft()
+
+      elif set(frontLeftEdge()) == target:
+            invLeftyFront()
+            invSexyLeft()
+
+            #Solve for red green corner:
+      target = {'R', 'G'}
+
+      if set(topFrontEdge()) == target:
+            if cube[19] == 'R':
+                  topLeft()
+                  invSexyLeft()
+                  invLeftyFront()
+            else:
+                  invLeftyFront()
+                  invSexyLeft()
+            
+      elif set(topRightEdge()) == target:
+            if cube[28] == 'R':
+                  topLeft()
+                  topLeft()
+                  invSexyLeft()
+                  invLeftyFront()
+            else:
+                  topLeft()
+                  invLeftyFront()
+                  invSexyLeft()
+
+      elif set(topBackEdge()) == target:
+            if cube[37] == 'R':
+                  topRight()
+                  invSexyLeft()
+                  invLeftyFront()
+            else:
+                  topRight()
+                  topRight()
+                  invLeftyFront()
+                  invSexyLeft()
+            
+      elif set(topLeftEdge()) == target:
+            if cube[46] == 'R':
+                  invSexyLeft()
+                  invLeftyFront()
+            else:
+                  topRight()
+                  invLeftyFront()
+                  invSexyLeft()
+
+      elif set(frontRightEdge()) == target:
+            invSexyFront()
+            invLeftyRight()
+
+      elif set(backRightEdge()) == target:
+            invSexyRight()
+            invLeftyBack()
+            
+      elif set(backLeftEdge()) == target:
+            invSexyBack()
+            invLeftyLeft()
+
+      elif frontLeftEdge() == ['R','G']:
+            invLeftyFront()
+            invSexyLeft()
 
       count += 1
 
@@ -919,275 +1080,312 @@ while((frontLeftEdge() != ['G','R']) or (frontRightEdge() != ['G','O'])\
 
 
 
+print(frontLeftEdge())
+print(frontRightEdge())
+print(backRightEdge())
+print(backLeftEdge())
+
+print("Should be: \n['G', 'R']\n['G', 'O']\n['O', 'B']\n['B', 'R']")
+
+
 
 #################################
 # POST F2L: Creating Yellow Cross
 #################################
 
-# while((cube[1] != 'Y') or (cube[3] != 'Y') or (cube[5] != 'Y') or (cube[7] != 'Y')):
+while((cube[1] != 'Y') or (cube[3] != 'Y') or (cube[5] != 'Y') or (cube[7] != 'Y')):
 
-#       #Angle Cases
-#       if((cube[1] == 'Y') and (cube[3] == 'Y')):
-#             topRight()
-#             topRight()
+      #Angle Cases
+      if((cube[1] == 'Y') and (cube[3] == 'Y')):
+            topRight()
+            topRight()
 
-#       elif((cube[1] == 'Y') and (cube[5] == 'Y')):
-#             topLeft()
+      elif((cube[1] == 'Y') and (cube[5] == 'Y')):
+            topLeft()
       
-#       elif((cube[3] == 'Y') and (cube[7] == 'Y')):
-#             topRight()
+      elif((cube[3] == 'Y') and (cube[7] == 'Y')):
+            topRight()
 
-#       if((cube[5] == 'Y') and (cube[7] == 'Y')):
-#             frontRight()
-#             sexyFront()
-#             frontLeft()
+      if((cube[5] == 'Y') and (cube[7] == 'Y')):
+            frontRight()
+            sexyFront()
+            frontLeft()
      
-#      #fixing vertical line scenario
-#       if((cube[1] == 'Y') and (cube[7] == 'Y')):
-#             topLeft() 
-#       #Horizontal line
-#       if((cube[3] == 'Y') and (cube[5] == 'Y')):
-#             frontRight()
-#             sexyFront()
-#             frontLeft()
+     #fixing vertical line scenario
+      if((cube[1] == 'Y') and (cube[7] == 'Y')):
+            topLeft() 
+      #Horizontal line
+      if((cube[3] == 'Y') and (cube[5] == 'Y')):
+            frontRight()
+            sexyFront()
+            frontLeft()
+      if((cube[1] != 'Y') and (cube[3] != 'Y')\
+         and (cube[5] != 'Y') and (cube[7] != 'Y')):
+            frontRight()
+            sexyFront()
+            frontLeft()
       
-#       #Check for infinite loop
-#       count += 1
-#       if(count == 3):
-#             print(cube)
-#             print("stuck in yellow cross")
-#             break
+      #Check for infinite loop
+      count += 1
+      if(count == 100):
+            print(cube)
+            for i in range(len(standardNotationMoves)):   
+                  standardNotationMovesStr += standardNotationMoves[i]
+                  standardNotationMovesStr += ", "
+            print(standardNotationMovesStr)
+            print("stuck in yellow cross")
+            exit()
+
       
-# ###########################
-# # POST F2L AND YELLOW CROSS
-# ########################### 
+###########################
+# POST F2L AND YELLOW CROSS
+########################### 
 
-# #Solving Yellow Corners
-# while(cube[0] != 'Y' or cube[2] != 'Y' or cube[6] != 'Y' or cube[8] != 'Y'):
-#       while(cube[6] != 'Y'):
-#             upsideDownSexyFront()
-#       topRight()
+#Solving Yellow Corners
+while(cube[0] != 'Y' or cube[2] != 'Y' or cube[6] != 'Y' or cube[8] != 'Y'):
+      while(cube[6] != 'Y'):
+            upsideDownSexyFront()
+      topRight()
 
-#             #Check for infinite loop
-#       count += 1
-#       if(count == 100):
-#             print(cube)
-#             print("stuck in yellow corners")
-#             break
+            #Check for infinite loop
+      count += 1
+      if(count == 100):
+            print(cube)
+            for i in range(len(standardNotationMoves)):   
+                  standardNotationMovesStr += standardNotationMoves[i]
+                  standardNotationMovesStr += ", "
+            print(moveHistory)
+            print(standardNotationMovesStr)
+            print("stuck in yellow corners")
+            break
 
-# while(cube[6] != 'Y'):
-#      upsideDownSexyFront()
+while(cube[6] != 'Y'):
+     upsideDownSexyFront()
 
-# #Find Headlights
+#Find Headlights
 
-# def frontHeadlights():
-#      return [cube[i] for i in (18, 20)]
+def frontHeadlights():
+     return [cube[i] for i in (18, 20)]
 
-# def rightHeadlights():
-#       return [cube[i] for i in (27, 29)]
+def rightHeadlights():
+      return [cube[i] for i in (27, 29)]
 
-# def backHeadlights():
-#       return [cube[i] for i in (36, 38)]
+def backHeadlights():
+      return [cube[i] for i in (36, 38)]
 
-# def leftHeadlights():
-#       return [cube[i] for i in (45, 47)]
+def leftHeadlights():
+      return [cube[i] for i in (45, 47)]
 
-# #See if a set of headlights exists
-# def hasHeadlights(headlights):
-#      if headlights == ['G', 'G']\
-#             or headlights == ['O', 'O']\
-#             or headlights == ['B', 'B']\
-#             or headlights == ['R', 'R']:
+#See if a set of headlights exists
+def hasHeadlights(headlights):
+     if headlights == ['G', 'G']\
+            or headlights == ['O', 'O']\
+            or headlights == ['B', 'B']\
+            or headlights == ['R', 'R']:
           
-#           return True
-#      else:
-#           return False
+          return True
+     else:
+          return False
      
 
-# #testing:
-# print(
-#     frontHeadlights(),
-#     rightHeadlights(),
-#     backHeadlights(),
-#     leftHeadlights()
-# )
+#testing:
+print(
+    frontHeadlights(),
+    rightHeadlights(),
+    backHeadlights(),
+    leftHeadlights()
+)
 
-# #Checking that corners are in right place
+#Checking that corners are in right place
 
-# while(ftlCorner() != {'Y','R','G'} or\
-#       ftrCorner() != {'Y','O','G'} or\
-#       btrCorner() != {'Y','O','B'} or\
-#       btlCorner() != {'Y','R','B'}):
+while(ftlCorner() != {'Y','R','G'} or\
+      ftrCorner() != {'Y','O','G'} or\
+      btrCorner() != {'Y','O','B'} or\
+      btlCorner() != {'Y','R','B'}):
 
-#      #Checking for front headlights
-#       if hasHeadlights(frontHeadlights()):
-#             tPermRight()
-#             break
+     #Checking for front headlights
+      if hasHeadlights(frontHeadlights()):
+            tPermRight()
+            break
 
-#       #Checking for right headlights
-#       elif hasHeadlights(rightHeadlights()):
-#             tPermBack()
-#             break
+      #Checking for right headlights
+      elif hasHeadlights(rightHeadlights()):
+            tPermBack()
+            break
 
-#       #Checking for back headlights
-#       elif hasHeadlights(backHeadlights()):
-#             tPermLeft()
-#             break
+      #Checking for back headlights
+      elif hasHeadlights(backHeadlights()):
+            tPermLeft()
+            break
 
-#       #Checking for left headlights
-#       elif hasHeadlights(leftHeadlights()):
-#             tPermFront()
-#             break
+      #Checking for left headlights
+      elif hasHeadlights(leftHeadlights()):
+            tPermFront()
+            break
 
-#       else:
-#             tPermFront()
+      else:
+            tPermFront()
                
-#       #Check for infinite loop
-#       count += 1
-#       if(count == 100):
-#             print(cube)
-#             print("stuck in t perm")
-#             break
+      #Check for infinite loop
+      count += 1
+      if(count == 100):
+            print(cube)
+            print("stuck in t perm")
+            break
 
-# # #Full front top bars for final moves
-# def frontBar():
-#       return [cube[i] for i in (18, 19, 20)]
+# #Full front top bars for final moves
+def frontBar():
+      return [cube[i] for i in (18, 19, 20)]
 
-# def rightBar():
-#       return [cube[i] for i in (27, 28, 29)]
+def rightBar():
+      return [cube[i] for i in (27, 28, 29)]
 
-# def backBar():
-#       return [cube[i] for i in (36, 37, 38)]
+def backBar():
+      return [cube[i] for i in (36, 37, 38)]
 
-# def leftBar():
-#       return [cube[i] for i in (45, 46, 47)]
+def leftBar():
+      return [cube[i] for i in (45, 46, 47)]
 
-# #Functions to check if a bar is filled by a color
-# def isGBar(bar):
-#       return bar == ['G','G','G']
+#Functions to check if a bar is filled by a color
+def isGBar(bar):
+      return bar == ['G','G','G']
 
-# def isOBar(bar):
-#       return bar == ['O','O','O']
+def isOBar(bar):
+      return bar == ['O','O','O']
 
-# def isBBar(bar):
-#       return bar == ['B','B','B']
+def isBBar(bar):
+      return bar == ['B','B','B']
 
-# def isRBar(bar):
-#       return bar == ['R','R','R']
+def isRBar(bar):
+      return bar == ['R','R','R']
      
-# #check if cube is solved
-# while(isGBar(frontBar()) or isOBar(rightBar()) or isBBar(backBar()) or isRBar(leftBar())):
+
+
+
+#check if cube is solved
+while not (isGBar(frontBar()) or isOBar(rightBar()) or isBBar(backBar()) or isRBar(leftBar())):
+      print("1")
+      #Check for green bar for final moves
+      if isGBar(frontBar()) or isGBar(rightBar()) or isGBar(backBar()) or isGBar(leftBar()):         
+            if rightBar() == ['G', 'G', 'G']:
+                  topLeft()
+                  #print("1")
+
+            if backBar() == ['G', 'G', 'G']:
+                  topLeft()
+                  topLeft()
+                  #print("2")
+
+            if leftBar() == ['G', 'G', 'G']:
+                  topRight()
+                  #print("3")
+
+            if frontBar() == ['G', 'G', 'G']:
+                  if cube[28] == 'B':
+                        uPermFront()
+                        break
+                  elif cube[28] == 'R':
+                        luPermFront()
+                        break
+                  #print("4")                  
+
+      #Search for orange bar
+      elif isOBar(frontBar()) or isOBar(rightBar()) or isOBar(backBar()) or isOBar(leftBar()):
+            if backBar() == ['O', 'O', 'O']:
+                  topLeft()
+                  #print("5")
+
+            if leftBar() == ['O', 'O', 'O']:
+                  topLeft()
+                  topLeft()
+                  #print("6")
+
+            if frontBar() == ['O', 'O', 'O']:
+                  topRight()
+                  #print("7")
+
+            if rightBar() == ['O', 'O', 'O']:
+                  if cube[37] == 'R':
+                        uPermRight()
+                        break
+                  elif cube[37] == 'G':
+                        luPermRight()
+                        break
+                  #print("8")
+
+      #Search for blue bar
+      elif isBBar(frontBar()) or isBBar(rightBar()) or isBBar(backBar()) or isBBar(leftBar()):
+            if leftBar() == ['B', 'B', 'B']:
+                  topLeft()
+                  #print("9")
+
+            if frontBar() == ['B', 'B', 'B']:
+                  topLeft()
+                  topLeft()
+                  #print("10")
+
+            if rightBar() == ['B', 'B', 'B']:
+                  topRight()
+                  #print("11")
+
+            if backBar() == ['B', 'B', 'B']:
+                  if cube[46] == 'G':
+                        uPermBack()
+                        break
+                  elif cube[46] == 'O':
+                        luPermBack()
+                        break
+                  #print("12")
+                  print(cube)
+
+      #Search for red bar
+      elif isRBar(frontBar()) or isRBar(rightBar()) or isRBar(backBar()) or isRBar(leftBar()):
+            if frontBar() == ['R', 'R', 'R']:
+                  topLeft()
+                  #print("13")
+
+            if rightBar() == ['R', 'R', 'R']:
+                  topLeft()
+                  topLeft()
+                  #print("14")
+
+            if backBar() == ['R', 'R', 'R']:
+                  topRight()
+                  #print("15")
+
+            if leftBar() == ['R', 'R', 'R']:
+                  if cube[19] == 'O':
+                        uPermLeft()
+                        break
+                  elif cube[19] == 'B':
+                        luPermLeft()
+                        break
+                  #print("16")
+
+      else:
+            uPermFront()
+            #print("17")
       
-#       #Check for green bar for final moves
-#       if isGBar(frontBar()) or isGBar(rightBar()) or isGBar(backBar()) or isGBar(leftBar()):         
-#             if rightBar() == ['G', 'G', 'G']:
-#                   topLeft()
-#                   #print("1")
+      #Check for infinite loop
+      count += 1
+      if(count == 100):
+            print(cube)
+            print("stuck in u perm")
 
-#             if backBar() == ['G', 'G', 'G']:
-#                   topLeft()
-#                   topLeft()
-#                   #print("2")
 
-#             if leftBar() == ['G', 'G', 'G']:
-#                   topRight()
-#                   #print("3")
+#Check for misaligned top:
+while not cubeSolved():
+      topRight()
 
-#             if frontBar() == ['G', 'G', 'G']:
-#                   if cube[28] == 'B':
-#                         uPermFront()
-#                         break
-#                   elif cube[28] == 'R':
-#                         luPermFront()
-#                         break
-#                   #print("4")                  
+      count += 1
+      if count > 100:
+            print('Stuck in final step')
+            break
 
-#       #Search for orange bar
-#       elif isOBar(frontBar()) or isOBar(rightBar()) or isOBar(backBar()) or isOBar(leftBar()):
-#             if backBar() == ['O', 'O', 'O']:
-#                   topLeft()
-#                   #print("5")
-
-#             if leftBar() == ['O', 'O', 'O']:
-#                   topLeft()
-#                   topLeft()
-#                   #print("6")
-
-#             if frontBar() == ['O', 'O', 'O']:
-#                   topRight()
-#                   #print("7")
-
-#             if rightBar() == ['O', 'O', 'O']:
-#                   if cube[37] == 'R':
-#                         uPermRight()
-#                         break
-#                   elif cube[37] == 'G':
-#                         luPermRight()
-#                         break
-#                   #print("8")
-
-#       #Search for blue bar
-#       elif isBBar(frontBar()) or isBBar(rightBar()) or isBBar(backBar()) or isBBar(leftBar()):
-#             if leftBar() == ['B', 'B', 'B']:
-#                   topLeft()
-#                   #print("9")
-
-#             if frontBar() == ['B', 'B', 'B']:
-#                   topLeft()
-#                   topLeft()
-#                   #print("10")
-
-#             if rightBar() == ['B', 'B', 'B']:
-#                   topRight()
-#                   #print("11")
-
-#             if backBar() == ['B', 'B', 'B']:
-#                   if cube[46] == 'G':
-#                         uPermBack()
-#                         break
-#                   elif cube[46] == 'O':
-#                         luPermBack()
-#                         break
-#                   #print("12")
-#                   print(cube)
-
-#       #Search for red bar
-#       elif isRBar(frontBar()) or isRBar(rightBar()) or isRBar(backBar()) or isRBar(leftBar()):
-#             if frontBar() == ['R', 'R', 'R']:
-#                   topLeft()
-#                   #print("13")
-
-#             if rightBar() == ['R', 'R', 'R']:
-#                   topLeft()
-#                   topLeft()
-#                   #print("14")
-
-#             if backBar() == ['R', 'R', 'R']:
-#                   topRight()
-#                   #print("15")
-
-#             if leftBar() == ['R', 'R', 'R']:
-#                   if cube[19] == 'O':
-#                         uPermLeft()
-#                         break
-#                   elif cube[19] == 'B':
-#                         luPermLeft()
-#                         break
-#                   #print("16")
-
-#       else:
-#             uPermFront()
-#             #print("17")
-      
-#       #Check for infinite loop
-#       count += 1
-#       if(count == 100):
-#             print(cube)
-#             print("stuck in u perm")
             
 
-# print(ogCube == cube)
-#print(cube)
+print(ogCube == cube)
+print(cube)
 
 
 
