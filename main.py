@@ -17,12 +17,12 @@ count = 0
 
 #random scramble
 cube = [
-'Y', 'Y', 'B', 'Y', 'Y', 'Y', 'R', 'Y', 'B', 
-'O', 'W', 'O', 'W', 'W', 'W', 'W', 'W', 'W', 
-'Y', 'R', 'R', 'G', 'G', 'G', 'G', 'G', 'Y', 
-'Y', 'B', 'W', 'O', 'O', 'O', 'B', 'O', 'O', 
-'R', 'O', 'G', 'B', 'B', 'B', 'B', 'B', 'R', 
-'O', 'G', 'G', 'R', 'R', 'R', 'G', 'R', 'W']
+'Y', 'O', 'O', 'W', 'Y', 'W', 'G', 'Y', 'W', 
+'W', 'Y', 'W', 'O', 'W', 'B', 'W', 'R', 'R', 
+'R', 'O', 'B', 'Y', 'G', 'W', 'G', 'G', 'B', 
+'O', 'O', 'Y', 'B', 'O', 'R', 'R', 'R', 'B', 
+'G', 'B', 'O', 'G', 'B', 'R', 'Y', 'Y', 'G', 
+'B', 'G', 'Y', 'W', 'R', 'B', 'O', 'G', 'R']
 
 #test case for white cross
 
@@ -109,16 +109,38 @@ def cubeSolved():
         'R','R','R','R','R','R','R','R','R'
     ]
 
+def bugStop():
+      for i in range(len(standardNotationMoves)):   
+            standardNotationMovesStr += standardNotationMoves[i]
+            standardNotationMovesStr += ", "
+
+      print(standardNotationMovesStr)
+      print(moveHistory)
+
+      print("Front Bottom:", cube[10], cube[25], "| Should be W G")
+
+      # Right-bottom edge
+      print("Right Bottom:", cube[14], cube[34], "| Should be W O")
+
+      # Back-bottom edge
+      print("Back Bottom:", cube[16], cube[43], "| Should be W B")
+
+      # Left-bottom edge
+      print("Left Bottom:", cube[12], cube[52], "| Should be W R")
+
+
+      for i in range(0, 54, 9):
+            print(cube[i:i+9])
+
+      exit()
+
 #######################################
 #START OF WHITE CROSS CODE; RED-WHITE EDGE
 ####################################### 
 #top -- 1 (top-back)
 if cube[1] == 'R' and cube[37] == 'W':
-    topRight()
-    leftDown()
-    bottomLeft()
-    frontLeft()
-    bottomRight()
+    backLeft()
+    leftUp()
     print('in top\n')
 elif cube[1] == 'W' and cube[37] == 'R':
     topRight()
@@ -133,7 +155,6 @@ elif cube[3] == 'R' and cube[46] == 'W':
     bottomLeft()
     print('in top 2\n')
 elif cube[3] == 'W' and cube[46] == 'R':
-    print(cube[46])
     leftDown()
     leftDown()
     print('in top 2-\n')
@@ -141,12 +162,11 @@ elif cube[3] == 'W' and cube[46] == 'R':
 elif cube[7] == 'W' and cube[19] == 'R':
     frontLeft()
     frontLeft()
+    bottomLeft()
     print('in top 3\n')
 elif cube[7] == 'R' and cube[19] == 'W':
-    topRight()
-    leftDown()
     frontLeft()
-    leftUp()
+    leftDown()
     print('in top 3-\n')
 #top -- 4 (right)
 elif cube[5] == 'W' and cube[28] == 'R':
@@ -158,16 +178,16 @@ elif cube[5] == 'W' and cube[28] == 'R':
 elif cube[5] == 'R' and cube[28] == 'W':
     rightDown()
     frontRight()
-    rightUp()
+    bottomLeft()
     print('in top 4-\n')
 #middle -- 1 (back-left)
 elif cube[41] == 'W' and cube[48] == 'R':
     leftUp()
     print('in mid 1\n')
 elif cube[41] == 'R' and cube[48] == 'W':
-    bottomRight()
-    backLeft()
     bottomLeft()
+    backLeft()
+    bottomRight()
     
     print('in mid 1-\n')
 #middle -- 2 (front-left)
@@ -175,42 +195,34 @@ elif cube[21] == 'W' and cube[50] == 'R':
      leftDown()
      print('in mid 2\n')
 elif cube[21] == 'R' and cube[50] == 'W':
-     leftDown()
-     leftDown()
-     bottomRight()
-     backLeft()
-     bottomRight()
+     frontLeft()
+     bottomLeft()
      print('in mid 2-\n')
 #middle -- 3 (front-right)
 elif cube[23] == 'W' and cube[30] == 'R':
-     bottomLeft()
-     bottomLeft()
      rightDown()
      bottomRight()
      bottomRight()
      print('in mid 3\n')
 elif cube[23] == 'R' and cube[30] == 'W':
-     bottomLeft()
      frontRight()
-     bottomRight()
+     bottomLeft()
      print('in mid 3-\n')
 #middle -- 4 (back-right)
 elif cube[32] == 'W' and cube[39] == 'R':
-     bottomRight()
      backRight()
-     bottomLeft()
+     bottomRight()
      print('in mid 4\n')
 elif cube[32] == 'R' and cube[39] == 'W':
-     bottomRight()
-     backRight()
+     rightUp()
+     bottomLeft()
      bottomLeft()
      print('in mid 4-\n')
 #bottom -- 1 (bottom-Left edge)
 elif cube[12] == 'R' and cube[52] == 'W':
      leftDown()
-     bottomRight()
      backLeft()
-     bottomLeft()
+     bottomRight()
      print('in bot 1\n')
      #Another Elif not needed because it would be where 
      #its supposed to be
@@ -221,39 +233,27 @@ elif cube[25] == 'W' and cube[10] == 'R':
       leftDown()
       print('in bot 2\n')
 elif cube[25] == 'R' and cube[10] == 'W':
-      frontRight()
-      frontRight()
-      topLeft()
-      leftDown()
-      leftDown()
+      bottomLeft()
       print('in bot 2-\n')
 #bottom - 3 (bottom-right edge)
 elif cube[14] == 'R' and cube[34] == 'W':
-      rightDown()
-      bottomRight()
-      bottomRight()
-      rightUp()
       bottomLeft()
-      bottomLeft()
+      frontRight()
+      leftDown()
       print('in bot 3\n')
 elif cube[14] == 'W' and cube[34] == 'R':
-     rightDown()
-     bottomRight()
-     backRight()
-     bottomLeft()
-     print('in bot 3-\n')
+      bottomRight()
+      bottomRight()
+      print('in bot 3-\n')
 #bottom - 4 (bottom-back edge)
 elif cube[16] == 'W' and cube[43] == 'R':
-     backLeft()
-     backLeft()
-     topRight()
-     leftDown()
-     leftDown()
+     bottomRight()
      print('in bot 4\n')
 elif cube[16] == 'R' and cube[43] == 'W':
       backRight()
       leftUp()
       print('in bot 4-\n')
+
 
 ##############################
 #BLUE-WHITE EDGE
@@ -269,10 +269,9 @@ elif cube[1] == 'W' and cube[37] == 'B':
 #top -- 2 (top-left edge)
 elif cube[3] == 'B' and cube[46] == 'W':
       topLeft()
-      backLeft()
-      bottomRight()
-      leftUp()
-      bottomLeft()
+      topLeft()
+      rightUp()
+      backRight()
 elif cube[3] == 'W' and cube[46] == 'B':
       topLeft()
       backRight()
@@ -285,26 +284,21 @@ elif cube[7] == 'W' and cube[19] == 'B':
       backLeft()
 elif cube[7] == 'B' and cube[19] == 'W':
       topRight()
-      bottomRight()
       rightUp()
-      bottomLeft()
       backRight()
 #top -- 4 (top-right)
 elif cube[5] == 'W' and cube[28] == 'B':
+      rightUp()
+      rightUp()
       bottomRight()
-      rightUp()
-      rightUp()
-      bottomLeft()
 elif cube[5] == 'B' and cube[28] == 'W':
-      bottomRight()
       rightUp()
-      bottomLeft()
       backRight()
 #middle -- 1 (back-left)
 elif cube[41] == 'W' and cube[48] == 'B':
-      bottomLeft()
-      leftUp()
       bottomRight()
+      leftUp()
+      bottomLeft()
 elif cube[41] == 'B' and cube[48] == 'W':
       backLeft()
 #middle -- 2 (front-left)
@@ -320,9 +314,9 @@ elif cube[21] == 'B' and cube[50] == 'W':
       bottomLeft()
 #middle -- 3 (front-right)
 elif cube[23] == 'W' and cube[30] == 'B':
-      bottomRight()
-      rightDown()
       bottomLeft()
+      rightDown()
+      bottomRight()
 elif cube[23] == 'B' and cube[30] == 'W':
       bottomRight()
       bottomRight()
@@ -333,19 +327,19 @@ elif cube[23] == 'B' and cube[30] == 'W':
 elif cube[32] == 'W' and cube[39] == 'B':
       backRight()
 elif cube[32] == 'B' and cube[39] == 'W':
-      bottomRight()
-      rightUp()
       bottomLeft()
-#bottom -- 1 (bottom-Left edge)
-elif cube[12] == 'B' and cube[52] == 'W':
-      leftDown()
-      backLeft()
-elif cube[12] == 'W' and cube[52] == 'B':
-      leftUp()
-      leftUp()
-      topLeft()
-      backRight()
-      backRight()
+      rightUp()
+      bottomRight()
+#bottom -- 1 (bottom-Left edge) not possible
+#elif cube[12] == 'B' and cube[52] == 'W':
+      #leftDown()
+      #backLeft()
+# elif cube[12] == 'W' and cube[52] == 'B':
+#       leftUp()
+#       leftUp()
+#       topLeft()
+#       backRight()
+#       backRight()
 #bottom - 2 (bottom-front edge)
 elif cube[25] == 'B' and cube[10] == 'W':
       frontLeft()
@@ -356,15 +350,15 @@ elif cube[25] == 'B' and cube[10] == 'W':
       backRight()
 elif cube[25] == 'W' and cube[10] == 'B':
       frontLeft()
-      bottomRight()
-      rightDown()
       bottomLeft()
+      rightDown()
+      bottomRight()
 #bottom - 3 (bottom-right edge)
 elif cube[14] == 'W' and cube[34] == 'B':
       rightUp()
-      bottomRight()
-      rightDown()
       bottomLeft()
+      rightDown()
+      bottomRight()
 elif cube[14] == 'B' and cube[34] == 'W':
       rightDown()
       backRight()
@@ -374,9 +368,10 @@ elif cube[14] == 'B' and cube[34] == 'W':
 
 elif cube[16] == 'B' and cube[43] == 'W':
       backLeft()
-      bottomRight()
-      rightUp()
       bottomLeft()
+      rightUp()
+      bottomRight()
+
 
 ##############################
 #ORANGE-WHITE EDGE
@@ -386,9 +381,9 @@ elif cube[16] == 'B' and cube[43] == 'W':
 if cube[1] == 'O' and cube[37] == 'W':
       topLeft()
       rightDown()
-      bottomRight()
-      frontRight()
       bottomLeft()
+      frontRight()
+      bottomRight()
 elif cube[1] == 'W' and cube[37] == 'O':
       topLeft()
       rightUp()
@@ -396,11 +391,8 @@ elif cube[1] == 'W' and cube[37] == 'O':
 #top -- 2 (top-left edge)
 elif cube[3] == 'O' and cube[46] == 'W':
       topRight()
-      topRight()
-      rightUp()
-      bottomLeft()
-      backRight()
-      bottomRight()
+      frontRight()
+      rightDown()
 elif cube[3] == 'W' and cube[46] == 'O':
       topRight()
       topRight()
@@ -412,19 +404,16 @@ elif cube[7] == 'W' and cube[19] == 'O':
       rightUp()
       rightUp()
 elif cube[7] == 'O' and cube[19] == 'W':
-      bottomRight()
       frontRight()
-      bottomLeft()
       rightDown()
 #top -- 4 (top-right)
 elif cube[5] == 'W' and cube[28] == 'O':
       rightDown()
       rightDown()
 elif cube[5] == 'O' and cube[28] == 'W':
-      rightUp()
-      bottomLeft()
-      backRight()
-      bottomRight()
+      topLeft()
+      frontRight()
+      rightDown()
 #middle -- 1 (back-left)
 elif cube[41] == 'W' and cube[48] == 'O':
       bottomLeft()
@@ -439,48 +428,46 @@ elif cube[41] == 'O' and cube[48] == 'W':
 
 #middle -- 2 (front-left)
 elif cube[21] == 'W' and cube[50] == 'O':
-      bottomRight()
-      bottomRight()
-      leftDown()
-      bottomLeft()
-      bottomLeft()
+      frontRight()
+      frontRight()
+      rightDown()
 elif cube[21] == 'O' and cube[50] == 'W':
-      bottomRight()
-      frontLeft()
       bottomLeft()
+      frontLeft()
+      bottomRight()
 #middle -- 3 (front-right)
 elif cube[23] == 'W' and cube[30] == 'O':
       rightDown()
 elif cube[23] == 'O' and cube[30] == 'W':
-      bottomRight()
-      frontRight()
       bottomLeft()
+      frontRight()
+      bottomRight()
 #middle -- 4 (back-right)
 elif cube[32] == 'W' and cube[39] == 'O':
-      bottomLeft()
-      backRight()
       bottomRight()
+      backRight()
+      bottomLeft()
 elif cube[32] == 'O' and cube[39] == 'W':
       rightDown()
-#bottom -- 1 (bottom-Left edge)
-elif cube[12] == 'O' and cube[52] == 'W':
-      leftUp()
-      bottomRight()
-      frontLeft()
-      bottomLeft()
-elif cube[12] == 'W' and cube[52] == 'O':
-      leftUp()
-      bottomRight()
-      bottomRight()
-      leftDown()
-      bottomLeft()
-      bottomLeft()
+# #bottom -- 1 (bottom-Left edge) cannot be here
+# elif cube[12] == 'O' and cube[52] == 'W':
+#       leftUp()
+#       bottomRight()
+#       frontLeft()
+#       bottomLeft()
+# elif cube[12] == 'W' and cube[52] == 'O':
+#       leftUp()
+#       bottomRight()
+#       bottomRight()
+#       leftDown()
+#       bottomLeft()
+#       bottomLeft()
 #bottom - 2 (bottom-front edge)
 elif cube[25] == 'O' and cube[10] == 'W':
       frontLeft()
-      bottomRight()
-      frontRight()
       bottomLeft()
+      frontRight()
+      bottomRight()
 elif cube[25] == 'W' and cube[10] == 'O':
       frontLeft()
       rightDown()
@@ -491,19 +478,19 @@ elif cube[25] == 'W' and cube[10] == 'O':
 
 elif cube[14] == 'O' and cube[34] == 'W':
       rightUp()
-      bottomRight()
+      bottomLeft()
       frontRight()
-      bottomLeft()
-
-#bottom - 4 (bottom-back edge)
-elif cube[16] == 'W' and cube[43] == 'O':
-      backLeft()
-      bottomLeft()
-      backRight()
       bottomRight()
-elif cube[16] == 'O' and cube[43] == 'W':
-      backLeft()
-      rightUp()
+
+#bottom - 4 (bottom-back edge) - cannot be here
+# elif cube[16] == 'W' and cube[43] == 'O':
+#       backLeft()
+#       bottomLeft()
+#       backRight()
+#       bottomRight()
+# elif cube[16] == 'O' and cube[43] == 'W':
+#       backLeft()
+#       rightUp()
 
 ##############################
 #Green-WHITE EDGE
@@ -537,7 +524,7 @@ elif cube[7] == 'W' and cube[19] == 'G':
       frontRight()
 elif cube[7] == 'G' and cube[19] == 'W':
       frontRight()
-      bottomLeft()
+      bottomRight()
       rightDown()
       bottomLeft()
 #top -- 4 (top-right)
@@ -573,9 +560,9 @@ elif cube[21] == 'G' and cube[50] == 'W':
       frontLeft()
 #middle -- 3 (front-right)
 elif cube[23] == 'W' and cube[30] == 'G':
-      bottomLeft()
-      rightDown()
       bottomRight()
+      rightDown()
+      bottomLeft()
 elif cube[23] == 'G' and cube[30] == 'W':
       frontRight()
 #middle -- 4 (back-right)
