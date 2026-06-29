@@ -142,7 +142,7 @@ def bottomLeft():
     cube[17] = bot7
     #adds move to move array
     moves.append("botL")
-    moves2.append("D")
+    moves2.append("D'")
 def bottomRight():
     #create temp variables for bottom of cube
     bot1 = cube[9]
@@ -188,7 +188,7 @@ def bottomRight():
     cube[53] = b9
     #append to moves
     moves.append("botR")
-    moves2.append("D'")
+    moves2.append("D")
 def rightUp():
     t3 = cube[2]
     t6 = cube[5]

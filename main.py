@@ -17,12 +17,12 @@ count = 0
 
 #random scramble
 cube = [
-'Y', 'O', 'O', 'W', 'Y', 'W', 'G', 'Y', 'W', 
-'W', 'Y', 'W', 'O', 'W', 'B', 'W', 'R', 'R', 
-'R', 'O', 'B', 'Y', 'G', 'W', 'G', 'G', 'B', 
-'O', 'O', 'Y', 'B', 'O', 'R', 'R', 'R', 'B', 
-'G', 'B', 'O', 'G', 'B', 'R', 'Y', 'Y', 'G', 
-'B', 'G', 'Y', 'W', 'R', 'B', 'O', 'G', 'R']
+'G', 'O', 'Y', 'Y', 'Y', 'W', 'B', 'W', 'B', 
+'W', 'Y', 'G', 'O', 'W', 'B', 'R', 'R', 'R', 
+'R', 'B', 'O', 'Y', 'G', 'B', 'G', 'G', 'Y', 
+'W', 'R', 'O', 'R', 'O', 'R', 'O', 'O', 'B', 
+'B', 'W', 'W', 'G', 'B', 'G', 'Y', 'Y', 'Y', 
+'O', 'O', 'W', 'W', 'R', 'B', 'G', 'G', 'R']
 
 #test case for white cross
 
@@ -579,17 +579,17 @@ elif cube[32] == 'G' and cube[39] == 'W':
 
 #Bottom Edges Unneeded
 
-# Front-bottom edge
-print("Front Bottom:", cube[10], cube[25], "| Should be W G")
+# # Front-bottom edge
+# print("Front Bottom:", cube[10], cube[25], "| Should be W G")
 
-# Right-bottom edge
-print("Right Bottom:", cube[14], cube[34], "| Should be W O")
+# # Right-bottom edge
+# print("Right Bottom:", cube[14], cube[34], "| Should be W O")
 
-# Back-bottom edge
-print("Back Bottom:", cube[16], cube[43], "| Should be W B")
+# # Back-bottom edge
+# print("Back Bottom:", cube[16], cube[43], "| Should be W B")
 
-# Left-bottom edge
-print("Left Bottom:", cube[12], cube[52], "| Should be W R")
+# # Left-bottom edge
+# print("Left Bottom:", cube[12], cube[52], "| Should be W R")
 
 
 ########################################################
@@ -1067,12 +1067,12 @@ while((frontLeftEdge() != ['G','R']) or (frontRightEdge() != ['G','O'])\
 
 
 
-print(frontLeftEdge())
-print(frontRightEdge())
-print(backRightEdge())
-print(backLeftEdge())
+#print(frontLeftEdge())
+#print(frontRightEdge())
+#print(backRightEdge())
+#print(backLeftEdge())
 
-print("Should be: \n['G', 'R']\n['G', 'O']\n['O', 'B']\n['B', 'R']")
+#print("Should be: \n['G', 'R']\n['G', 'O']\n['O', 'B']\n['B', 'R']\n")
 
 
 
@@ -1175,13 +1175,13 @@ def hasHeadlights(headlights):
           return False
      
 
-#testing:
-print(
-    frontHeadlights(),
-    rightHeadlights(),
-    backHeadlights(),
-    leftHeadlights()
-)
+# #testing:
+# print(
+#     frontHeadlights(),
+#     rightHeadlights(),
+#     backHeadlights(),
+#     leftHeadlights()
+# )
 
 #Checking that corners are in right place
 
@@ -1251,7 +1251,6 @@ def isRBar(bar):
 
 #check if cube is solved
 while not (isGBar(frontBar()) or isOBar(rightBar()) or isBBar(backBar()) or isRBar(leftBar())):
-      print("1")
       #Check for green bar for final moves
       if isGBar(frontBar()) or isGBar(rightBar()) or isGBar(backBar()) or isGBar(leftBar()):         
             if rightBar() == ['G', 'G', 'G']:
@@ -1369,21 +1368,14 @@ while not cubeSolved():
             print('Stuck in final step')
             break
 
-            
-
-print(ogCube == cube)
-print(cube)
-
-
-
-print(moveHistory)
+#print(moveHistory)
 print("Number of moves: ", len(moveHistory))
 
 for i in range(len(standardNotationMoves)):   
       standardNotationMovesStr += standardNotationMoves[i]
       standardNotationMovesStr += ", "
 
-print(standardNotationMovesStr)
+print(standardNotationMovesStr[0:(len(standardNotationMovesStr) - 2)])
 
 #testing tPerms
 # cube = ogCube.copy()

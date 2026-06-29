@@ -42,10 +42,6 @@ sexyFront()
 frontRight()
 frontRight()
 backRight()
-backRight()
-topRight()
-rightDown()
-backLeft()
 
 for i in range(len(standardNotationMoves)):   
       standardNotationMovesStr += standardNotationMoves[i]
