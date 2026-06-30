@@ -1,6 +1,8 @@
-cube = []
-moves = []
-moves2 = []
+import cube as cube_state
+
+cube = cube_state.cube
+moves = cube_state.moveHistory
+moves2 = cube_state.standardNotationMoves
 
 def topLeft():
     #creates temp variables for the top layer of cube

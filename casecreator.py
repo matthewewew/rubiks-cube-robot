@@ -49,7 +49,7 @@ for i in range(len(standardNotationMoves)):
 
 print(standardNotationMovesStr)
 
-print("cube = [")
+print("cube_state.load([")
 
 for i in range(54):
     end = ", "
@@ -60,5 +60,4 @@ for i in range(54):
 
     if (i + 1) % 9 == 0 and i != 53:
         print()
-
-print("]")
+print("])")
