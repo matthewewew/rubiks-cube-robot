@@ -3,6 +3,9 @@ from cube import is_solved
 from solver.moves import *
 
 def solve_last_layer():
+    print("Last layer input state:")
+    for i in range(0, 54, 9):
+        print(cube[i:i+9])
 
     #Redefining corner pieces so we can find where the specific corner pieces are
     def ftrCorner():
@@ -175,7 +178,7 @@ def solve_last_layer():
 
 
     #check if cube is solved
-    while not (isGBar(frontBar()) or isOBar(rightBar()) or isBBar(backBar()) or isRBar(leftBar())):
+    while not (isGBar(frontBar()) and isOBar(rightBar()) and isBBar(backBar()) and isRBar(leftBar())):
         #Check for green bar for final moves
         if isGBar(frontBar()) or isGBar(rightBar()) or isGBar(backBar()) or isGBar(leftBar()):         
                 if rightBar() == ['G', 'G', 'G']:
@@ -255,12 +258,12 @@ def solve_last_layer():
                     topLeft()
                     #print("13")
 
-                if rightBar() == ['R', 'R', 'R']:
+                elif rightBar() == ['R', 'R', 'R']:
                     topLeft()
                     topLeft()
                     #print("14")
 
-                if backBar() == ['R', 'R', 'R']:
+                elif backBar() == ['R', 'R', 'R']:
                     topRight()
                     #print("15")
 

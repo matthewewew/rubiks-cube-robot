@@ -1,5 +1,5 @@
-import moves
-from moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, rightDown, rightUp,\
+import solver.moves as moves
+from solver.moves import topRight, topLeft, frontLeft, frontRight, leftDown, leftUp, rightDown, rightUp,\
       backLeft, backRight, bottomLeft, bottomRight,\
       rotateFrontFaceRight, rotateFrontFaceLeft, rotateFrontFaceUp, rotateFrontFaceDown,\
       sexyFront, sexyRight, sexyLeft, sexyBack, sexyTop, sexyBot,\
@@ -30,18 +30,7 @@ ogCube = cube.copy()
 #PASTE IN SCRAMBLE HERE:
 
 
-sexyFront()
-sexyBack()
-bottomLeft()
-bottomLeft()
-sexyLeft()
-rightUp()
-leftDown()
-topRight()
-sexyFront()
-frontRight()
-frontRight()
-backRight()
+uPermLeft()
 
 for i in range(len(standardNotationMoves)):   
       standardNotationMovesStr += standardNotationMoves[i]
