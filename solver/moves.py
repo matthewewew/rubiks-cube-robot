@@ -997,7 +997,7 @@ def uPermRight():
     sexyRight()
     leftyRight()
     invSexyRight()
-    invLeftyBack()
+    invLeftyRight()
 
 def luPermRight():
     leftyRight()

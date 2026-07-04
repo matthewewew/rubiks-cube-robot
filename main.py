@@ -8,16 +8,16 @@ from esp32 import CubeBot
 
 def main():
     print("Starting scan...")
-    cube_state.load(scan_cube())
+    # cube_state.load(scan_cube())
     print("Scan complete, solving...")
 
-#     cube_state.load([
-#       'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 
-#       'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 
-#       'G', 'B', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 
-#       'O', 'G', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 
-#       'B', 'O', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 
-#       'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'])
+    cube_state.load([
+      'B', 'O', 'R', 'Y', 'Y', 'Y', 'O', 'R', 'Y', 
+      'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 
+      'Y', 'Y', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 
+      'O', 'G', 'G', 'O', 'O', 'O', 'O', 'O', 'O', 
+      'Y', 'Y', 'R', 'B', 'B', 'B', 'B', 'B', 'B', 
+      'Y', 'B', 'B', 'R', 'R', 'R', 'R', 'R', 'R'])
 
     solve_white_cross()
     solve_first_layer()
@@ -30,7 +30,7 @@ def main():
     if cube_state.is_solved():
         print("Cube solved!")
         try:
-            bot = CubeBot(port='/dev/tty.usbserial-0001')
+            bot = CubeBot(port='COM5')
             bot.send_sequence(cube_state.standardNotationMoves)
             bot.close()
         except Exception as e:

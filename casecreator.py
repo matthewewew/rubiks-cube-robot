@@ -30,7 +30,8 @@ ogCube = cube.copy()
 #PASTE IN SCRAMBLE HERE:
 
 
-uPermLeft()
+luPermRight()
+uPermRight()
 
 for i in range(len(standardNotationMoves)):   
       standardNotationMovesStr += standardNotationMoves[i]

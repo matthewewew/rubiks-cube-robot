@@ -20,7 +20,6 @@ def solve_last_layer():
     def fbotrCorner():
         return {cube[i] for i in (11, 26, 33)}
 
-
     def btrCorner():
         return {cube[i] for i in (2, 29, 36)}
 
@@ -69,7 +68,6 @@ def solve_last_layer():
                 sexyFront()
                 frontLeft()
 
-        
     ###########################
     # POST F2L AND YELLOW CROSS
     ########################### 
@@ -83,7 +81,6 @@ def solve_last_layer():
 
     while(cube[6] != 'Y'):
         upsideDownSexyFront()
-
     #Find Headlights
 
     def frontHeadlights():
@@ -119,12 +116,14 @@ def solve_last_layer():
     # )
 
     #Checking that corners are in right place
-
-    while(ftlCorner() != {'Y','R','G'} or\
-        ftrCorner() != {'Y','O','G'} or\
-        btrCorner() != {'Y','O','B'} or\
-        btlCorner() != {'Y','R','B'}):
-
+    def cornersPermuted():
+        corners = {frozenset(c) for c in [ftlCorner(), ftrCorner(), btrCorner(), btlCorner()]}
+        expected = {frozenset(e) for e in [{'Y','R','G'}, {'Y','O','G'}, {'Y','O','B'}, {'Y','R','B'}]}
+        return corners == expected
+    
+    while not cornersPermuted():
+        print("corners:", ftlCorner(), ftrCorner(), btrCorner(), btlCorner())
+        print("permuted:", cornersPermuted())
         #Checking for front headlights
         if hasHeadlights(frontHeadlights()):
                 tPermRight()
@@ -148,7 +147,7 @@ def solve_last_layer():
         else:
                 tPermFront()
 
-    # #Full front top bars for final moves
+    #Full front top bars for final moves
     def frontBar():
         return [cube[i] for i in (18, 19, 20)]
 
@@ -173,24 +172,23 @@ def solve_last_layer():
 
     def isRBar(bar):
         return bar == ['R','R','R']
-        
-
-
 
     #check if cube is solved
     while not (isGBar(frontBar()) and isOBar(rightBar()) and isBBar(backBar()) and isRBar(leftBar())):
         #Check for green bar for final moves
+        print("bars:", frontBar(), rightBar(), backBar(), leftBar())
+        print("cube[19]:", cube[19], "cube[28]:", cube[28], "cube[37]:", cube[37], "cube[46]:", cube[46])
         if isGBar(frontBar()) or isGBar(rightBar()) or isGBar(backBar()) or isGBar(leftBar()):         
                 if rightBar() == ['G', 'G', 'G']:
                     topLeft()
                     #print("1")
 
-                if backBar() == ['G', 'G', 'G']:
+                elif backBar() == ['G', 'G', 'G']:
                     topLeft()
                     topLeft()
                     #print("2")
 
-                if leftBar() == ['G', 'G', 'G']:
+                elif leftBar() == ['G', 'G', 'G']:
                     topRight()
                     #print("3")
 
@@ -209,12 +207,12 @@ def solve_last_layer():
                     topLeft()
                     #print("5")
 
-                if leftBar() == ['O', 'O', 'O']:
+                elif leftBar() == ['O', 'O', 'O']:
                     topLeft()
                     topLeft()
                     #print("6")
 
-                if frontBar() == ['O', 'O', 'O']:
+                elif frontBar() == ['O', 'O', 'O']:
                     topRight()
                     #print("7")
 
@@ -229,16 +227,17 @@ def solve_last_layer():
 
         #Search for blue bar
         elif isBBar(frontBar()) or isBBar(rightBar()) or isBBar(backBar()) or isBBar(leftBar()):
+                print("here")
                 if leftBar() == ['B', 'B', 'B']:
                     topLeft()
                     #print("9")
 
-                if frontBar() == ['B', 'B', 'B']:
+                elif frontBar() == ['B', 'B', 'B']:
                     topLeft()
                     topLeft()
                     #print("10")
 
-                if rightBar() == ['B', 'B', 'B']:
+                elif rightBar() == ['B', 'B', 'B']:
                     topRight()
                     #print("11")
 
@@ -254,6 +253,7 @@ def solve_last_layer():
 
         #Search for red bar
         elif isRBar(frontBar()) or isRBar(rightBar()) or isRBar(backBar()) or isRBar(leftBar()):
+                print("here")
                 if frontBar() == ['R', 'R', 'R']:
                     topLeft()
                     #print("13")
