@@ -8,16 +8,16 @@ from esp32 import CubeBot
 
 def main():
     print("Starting scan...")
-    # cube_state.load(scan_cube())
+    #cube_state.load(scan_cube())
     print("Scan complete, solving...")
 
     cube_state.load([
-      'B', 'O', 'R', 'Y', 'Y', 'Y', 'O', 'R', 'Y', 
-      'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 
-      'Y', 'Y', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 
-      'O', 'G', 'G', 'O', 'O', 'O', 'O', 'O', 'O', 
-      'Y', 'Y', 'R', 'B', 'B', 'B', 'B', 'B', 'B', 
-      'Y', 'B', 'B', 'R', 'R', 'R', 'R', 'R', 'R'])
+      'Y', 'R', 'O', 'W', 'Y', 'B', 'O', 'G', 'W', 
+      'Y', 'Y', 'B', 'G', 'W', 'G', 'Y', 'Y', 'B', 
+      'G', 'W', 'G', 'O', 'G', 'Y', 'O', 'G', 'W', 
+      'R', 'Y', 'G', 'R', 'O', 'B', 'O', 'O', 'R', 
+      'W', 'B', 'R', 'O', 'B', 'R', 'W', 'O', 'R', 
+      'G', 'B', 'Y', 'W', 'R', 'W', 'B', 'R', 'B'])
 
     solve_white_cross()
     solve_first_layer()

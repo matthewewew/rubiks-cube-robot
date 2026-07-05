@@ -117,9 +117,13 @@ def solve_last_layer():
 
     #Checking that corners are in right place
     def cornersPermuted():
-        corners = {frozenset(c) for c in [ftlCorner(), ftrCorner(), btrCorner(), btlCorner()]}
-        expected = {frozenset(e) for e in [{'Y','R','G'}, {'Y','O','G'}, {'Y','O','B'}, {'Y','R','B'}]}
-        return corners == expected
+        return (
+            hasHeadlights(frontHeadlights()) and
+            hasHeadlights(rightHeadlights()) and
+            hasHeadlights(backHeadlights()) and
+            hasHeadlights(leftHeadlights())
+        )
+
     
     while not cornersPermuted():
         print("corners:", ftlCorner(), ftrCorner(), btrCorner(), btlCorner())
@@ -132,6 +136,7 @@ def solve_last_layer():
         #Checking for right headlights
         elif hasHeadlights(rightHeadlights()):
                 tPermBack()
+                print(cube_state)
                 break
 
         #Checking for back headlights
