@@ -129,7 +129,7 @@ def solve_white_cross():
         leftUp()
         print('in bot 4-\n')
 
-
+    print(cube[9:18])
     ##############################
     #BLUE-WHITE EDGE
     ##############################
@@ -163,9 +163,9 @@ def solve_white_cross():
         backRight()
     #top -- 4 (top-right)
     elif cube[5] == 'W' and cube[28] == 'B':
-        rightUp()
-        rightUp()
-        bottomRight()
+        topRight()
+        backLeft()
+        backLeft()
     elif cube[5] == 'B' and cube[28] == 'W':
         rightUp()
         backRight()
@@ -247,7 +247,7 @@ def solve_white_cross():
         rightUp()
         bottomRight()
 
-
+    print(cube[9:18])
     ##############################
     #ORANGE-WHITE EDGE
     ##############################
@@ -466,4 +466,4 @@ def solve_white_cross():
     # # Left-bottom edge
     # print("Left Bottom:", cube[12], cube[52], "| Should be W R")
 
-        
+    print(cube[9:18])
