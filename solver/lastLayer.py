@@ -75,12 +75,18 @@ def solve_last_layer():
     #Solving Yellow Corners
     while(cube[0] != 'Y' or cube[2] != 'Y' or cube[6] != 'Y' or cube[8] != 'Y'):
         while(cube[6] != 'Y'):
+            if cube[18] == 'Y' or cube[24] == 'Y':    # yellow on front face (top or bottom slot)
+                upsideDownInvSexyFront()
+                print("inv sexy")
+            elif cube[47] == 'Y' or cube[53] == 'Y':  # yellow on left face (top or bottom slot)
+                upsideDownSexyFront()
+                print("sexy")
+            elif cube[9] == 'Y':                       # yellow on bottom face = needs sexy to bring it up
+                upsideDownSexyFront()
+                print("bottom sexy")
+            else:
                 upsideDownSexyFront()
         topRight()
-
-
-    while(cube[6] != 'Y'):
-        upsideDownSexyFront()
     #Find Headlights
 
     def frontHeadlights():
@@ -136,7 +142,6 @@ def solve_last_layer():
         #Checking for right headlights
         elif hasHeadlights(rightHeadlights()):
                 tPermBack()
-                print(cube_state)
                 break
 
         #Checking for back headlights

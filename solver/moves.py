@@ -981,6 +981,12 @@ def upsideDownSexyLeft():
     backRight()
     bottomLeft()
 
+def upsideDownInvSexyFront():
+    bottomRight()
+    leftDown()
+    bottomLeft()
+    leftUp()
+
 def uPermFront():
     sexyFront()
     leftyFront()

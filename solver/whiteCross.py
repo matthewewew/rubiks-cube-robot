@@ -129,7 +129,6 @@ def solve_white_cross():
         leftUp()
         print('in bot 4-\n')
 
-    print(cube[9:18])
     ##############################
     #BLUE-WHITE EDGE
     ##############################
@@ -178,9 +177,9 @@ def solve_white_cross():
         backLeft()
     #middle -- 2 (front-left)
     elif cube[21] == 'W' and cube[50] == 'B':
-        bottomLeft()
-        leftDown()
         bottomRight()
+        leftDown()
+        bottomLeft()
     elif cube[21] == 'B' and cube[50] == 'W':
         bottomLeft()
         bottomLeft()
@@ -247,7 +246,8 @@ def solve_white_cross():
         rightUp()
         bottomRight()
 
-    print(cube[9:18])
+    print("white blue edge: ", cube[16], cube[43], "| Should be W B")
+
     ##############################
     #ORANGE-WHITE EDGE
     ##############################
@@ -323,7 +323,7 @@ def solve_white_cross():
         backRight()
         bottomLeft()
     elif cube[32] == 'O' and cube[39] == 'W':
-        rightDown()
+        rightUp()
     # #bottom -- 1 (bottom-Left edge) cannot be here
     # elif cube[12] == 'O' and cube[52] == 'W':
     #       leftUp()
@@ -367,6 +367,10 @@ def solve_white_cross():
     #       backLeft()
     #       rightUp()
 
+    print("Pre green white:")
+    for i in range(0, 54, 9):
+        print(cube[i:i+9])
+    
     ##############################
     #Green-WHITE EDGE
     ##############################
@@ -451,8 +455,15 @@ def solve_white_cross():
         bottomRight()
         rightUp()
         bottomLeft()
+    #Bottom Edge
+    elif(cube[25] == 'W' and cube[10] == 'G'):
+        frontLeft()
+        bottomRight()
+        rightDown()
+        bottomLeft()
 
-    #Bottom Edges Unneeded
+    print("white side after white cross solve:")
+    print(cube[9:18])
 
     # # Front-bottom edge
     # print("Front Bottom:", cube[10], cube[25], "| Should be W G")
@@ -465,5 +476,3 @@ def solve_white_cross():
 
     # # Left-bottom edge
     # print("Left Bottom:", cube[12], cube[52], "| Should be W R")
-
-    print(cube[9:18])

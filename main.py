@@ -8,16 +8,16 @@ from esp32 import CubeBot
 
 def main():
     print("Starting scan...")
-    cube_state.load(scan_cube())
+    #cube_state.load(scan_cube())
     print("Scan complete, solving...")
 
-    # cube_state.load([
-    #   'W', 'Y', 'W', 'Y', 'Y', 'W', 'Y', 'Y', 'Y', 
-    #   'W', 'W', 'W', 'W', 'W', 'W', 'Y', 'Y', 'Y', 
-    #   'G', 'R', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 
-    #   'O', 'B', 'R', 'O', 'O', 'R', 'O', 'O', 'R', 
-    #   'B', 'O', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 
-    #   'O', 'G', 'R', 'O', 'R', 'R', 'O', 'R', 'R'])
+    cube_state.load([
+    'B', 'O', 'B', 'Y', 'Y', 'R', 'Y', 'Y', 'R', 
+    'G', 'W', 'W', 'W', 'W', 'G', 'W', 'W', 'G', 
+    'O', 'B', 'W', 'Y', 'G', 'Y', 'Y', 'G', 'O', 
+    'G', 'G', 'R', 'O', 'O', 'O', 'B', 'O', 'O', 
+    'Y', 'W', 'Y', 'B', 'B', 'B', 'W', 'B', 'B', 
+    'O', 'G', 'G', 'R', 'R', 'R', 'R', 'R', 'R'])
 
     solve_white_cross()
     solve_first_layer()

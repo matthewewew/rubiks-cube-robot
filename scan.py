@@ -220,10 +220,96 @@ def scan_cube():
     if len(captured) < 6:
         raise RuntimeError(f"Scan incomplete — only got {len(captured)}/6 faces")
 
+    
     cube_array = build_cube_array(captured)
     print(f"\nFull cube array ({len(cube_array)} stickers):")
     for i in range(0, 54, 9):
         print(f"  {FACE_ORDER[i // 9]}: {cube_array[i:i+9]}")
+
+    # reopen camera for review
+    cap = cv2.VideoCapture(CAMERA_INDEX)
+    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+
+    print("Review mode - SPACE to confirm, R to retake, Q to abort")
+    colors_map = {
+        'Y': (0, 255, 255), 
+        'W': (255, 255, 255), 
+        'G': (0, 255, 0),
+        'O': (0, 165, 255), 
+        'B': (255, 0, 0), 
+        'R': (0, 0, 255),
+        'X': (128, 128, 128)
+    }
+
+    review_index = 0
+    while review_index < 6:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        face_name = FACE_ORDER[review_index]
+        overlay = frame.copy()
+        h = frame.shape[0]
+
+        # draw 3x3 grid of captured colors in top left
+        face_colors = captured[face_name]
+        for idx, color in enumerate(face_colors):
+            row, col = idx // 3, idx % 3
+            x = 10 + col * 45
+            y = 100 + row * 45
+            bgr = colors_map.get(color, (128, 128, 128))
+            cv2.rectangle(overlay, (x, y), (x + 40, y + 40), bgr, -1)
+            cv2.putText(overlay, color, (x + 10, y + 28),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
+
+        cv2.putText(overlay, f"Review {face_name} ({review_index + 1}/6)",
+                    (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        cv2.putText(overlay, "SPACE confirm | R retake | Q abort",
+                    (10, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+
+        cv2.imshow('Cube Scanner', overlay)
+        key = cv2.waitKey(1) & 0xFF
+
+        if key == ord(' '):
+            print(f"Confirmed {face_name}")
+            review_index += 1
+
+        elif key == ord('r'):
+            print(f"Retaking {face_name}...")
+            retake_done = False
+            while not retake_done:
+                ret, frame = cap.read()
+                if not ret:
+                    break
+                face_overlay = draw_overlay(frame, x1, y1, cube_size, cell, face_name, review_index)
+                cv2.imshow('Cube Scanner', face_overlay)
+                key2 = cv2.waitKey(1) & 0xFF
+                if key2 == ord(' '):
+                    colors = scan_face(frame, face_name)
+                    if 'X' in colors:
+                        print(f"Warning: unknown color in {face_name}: {colors}")
+                    else:
+                        captured[face_name] = colors
+                        print(f"Retook {face_name}: {colors}")
+                        retake_done = True
+                elif key2 == ord('f'):
+                    colors = scan_face(frame, face_name)
+                    captured[face_name] = colors
+                    print(f"Force retook {face_name}: {colors}")
+                    retake_done = True
+                elif key2 == ord('q'):
+                    cap.release()
+                    cv2.destroyAllWindows()
+                    raise RuntimeError("Scan aborted during retake")
+
+        elif key == ord('q'):
+            cap.release()
+            cv2.destroyAllWindows()
+            raise RuntimeError("Scan aborted during review")
+
+    cap.release()
+    cv2.destroyAllWindows()
+    
     if not validate_cube(cube_array):
         from collections import Counter
         print("Invalid scan — color counts:", Counter(cube_array))

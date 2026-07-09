@@ -29,9 +29,23 @@ ogCube = cube.copy()
 
 #PASTE IN SCRAMBLE HERE:
 
-
-luPermRight()
-uPermRight()
+rightUp()
+frontRight()
+rightDown()
+topLeft()
+leftUp()
+backLeft()
+leftDown()
+bottomRight()
+frontLeft()
+rightUp()
+topRight()
+backRight()
+bottomLeft()
+frontRight()
+leftDown()
+topLeft()
+topLeft()
 
 for i in range(len(standardNotationMoves)):   
       standardNotationMovesStr += standardNotationMoves[i]
