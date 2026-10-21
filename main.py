@@ -8,16 +8,20 @@ from esp32 import CubeBot
 
 def main():
     print("Starting scan...")
-    #cube_state.load(scan_cube())
+    #Comment out if testing specific cube state
+    cube_state.load(scan_cube())
     print("Scan complete, solving...")
 
-    cube_state.load([
-    'B', 'O', 'B', 'Y', 'Y', 'R', 'Y', 'Y', 'R', 
-    'G', 'W', 'W', 'W', 'W', 'G', 'W', 'W', 'G', 
-    'O', 'B', 'W', 'Y', 'G', 'Y', 'Y', 'G', 'O', 
-    'G', 'G', 'R', 'O', 'O', 'O', 'B', 'O', 'O', 
-    'Y', 'W', 'Y', 'B', 'B', 'B', 'W', 'B', 'B', 
-    'O', 'G', 'G', 'R', 'R', 'R', 'R', 'R', 'R'])
+    #If you want to test a specific cube state, you can uncomment 
+    #the following lines and provide the cube state as a list of 54 colors.
+
+    # cube_state.load([
+    # 'B', 'O', 'B', 'Y', 'Y', 'R', 'Y', 'Y', 'R', 
+    # 'G', 'W', 'W', 'W', 'W', 'G', 'W', 'W', 'G', 
+    # 'O', 'B', 'W', 'Y', 'G', 'Y', 'Y', 'G', 'O', 
+    # 'G', 'G', 'R', 'O', 'O', 'O', 'B', 'O', 'O', 
+    # 'Y', 'W', 'Y', 'B', 'B', 'B', 'W', 'B', 'B', 
+    # 'O', 'G', 'G', 'R', 'R', 'R', 'R', 'R', 'R'])
 
     solve_white_cross()
     solve_first_layer()

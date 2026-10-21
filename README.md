@@ -1,5 +1,7 @@
 "# rubiks-cube-robot" 
 hi guys!
+dependencies:
+pip install opencv-python pyserial numpy
 
 # Top face
 t1 = cube[0]

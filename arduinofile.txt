@@ -1,0 +1,132 @@
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET -1
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+const int ledPin = 2;
+const int buttonPin = 4;
+
+String pendingSequence = "";
+bool sequenceReady = false;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
+
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println("SSD1306 failed");
+    while (true);
+  }
+
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 0);
+  display.println("Ready.");
+  display.display();
+
+  Serial.println("Ready. Send move sequence.");
+}
+
+void loop() {
+  if (Serial.available()) {
+    String line = Serial.readStringUntil('\n');
+    line.trim();
+    if (line.length() > 0) {
+      pendingSequence = line;
+      sequenceReady = true;
+      Serial.println("Sequence received. Press button to execute.");
+
+      display.clearDisplay();
+      display.setTextSize(1);
+      display.setCursor(0, 0);
+      display.println("Sequence received.");
+      display.println("Press button");
+      display.println("to execute.");
+      display.display();
+    }
+  }
+
+  if (sequenceReady && digitalRead(buttonPin) == LOW) {
+    delay(200);
+    executeSequence(pendingSequence);
+    sequenceReady = false;
+    pendingSequence = "";
+  }
+}
+
+void executeSequence(String seq) {
+  Serial.println("Executing...");
+  int start = 0;
+  int moveNum = 0;
+
+  int total = 0;
+  for (int i = 0; i < seq.length(); i++) {
+    if (seq[i] == ' ') total++;
+  }
+  total++;
+
+  while (start < seq.length()) {
+    int spaceIndex = seq.indexOf(' ', start);
+    String move;
+    if (spaceIndex == -1) {
+      move = seq.substring(start);
+      start = seq.length();
+    } else {
+      move = seq.substring(start, spaceIndex);
+      start = spaceIndex + 1;
+    }
+    move.trim();
+    if (move.length() > 0) {
+      moveNum++;
+      executeMove(move, moveNum, total);
+      delay(300);
+    }
+  }
+
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setCursor(0, 0);
+  display.println("DONE!");
+  display.display();
+  Serial.println("DONE");
+}
+
+void executeMove(String move, int moveNum, int total) {
+  Serial.print("Move: ");
+  Serial.println(move);
+
+  display.clearDisplay();
+
+  display.setTextSize(1);
+  display.setCursor(80, 0);
+  display.print(moveNum);
+  display.print("/");
+  display.print(total);
+
+  display.setTextSize(4);
+  int x = (128 - (move.length() * 24)) / 2;
+  display.setCursor(x, 16);
+  display.println(move);
+
+  display.display();
+
+  digitalWrite(ledPin, HIGH);
+  delay(150);
+  digitalWrite(ledPin, LOW);
+}
+
+void doBlink() {
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(ledPin, HIGH);
+    delay(250);
+    digitalWrite(ledPin, LOW);
+    delay(250);
+  }
+}

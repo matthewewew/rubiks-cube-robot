@@ -77,13 +77,10 @@ def solve_last_layer():
         while(cube[6] != 'Y'):
             if cube[18] == 'Y' or cube[24] == 'Y':    # yellow on front face (top or bottom slot)
                 upsideDownInvSexyFront()
-                print("inv sexy")
             elif cube[47] == 'Y' or cube[53] == 'Y':  # yellow on left face (top or bottom slot)
                 upsideDownSexyFront()
-                print("sexy")
             elif cube[9] == 'Y':                       # yellow on bottom face = needs sexy to bring it up
                 upsideDownSexyFront()
-                print("bottom sexy")
             else:
                 upsideDownSexyFront()
         topRight()
